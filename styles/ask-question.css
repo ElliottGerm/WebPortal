@@ -1,0 +1,32 @@
+.form-group {
+    width: 600px;
+}
+
+#display {
+    border: 1px solid rgb(210, 210, 230);
+    border-radius: 3px;
+    width: 600px;
+    min-height: 100px;
+    max-height: 500px;
+    margin-top: 10px;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+    /* background-color: #8064A2 !important; */
+    /* color: rgb(46, 46, 46) !important; */
+}
+
+
+/* 
+#cs149 {
+    display: none;
+}
+
+#cs159 {
+    display: none;
+} */
