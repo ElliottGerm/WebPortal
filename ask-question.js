@@ -14,7 +14,8 @@ function appendText() {
 
 function showInput() {
     // console.log('showInput called...')
-
+    var A = new Date();
+    var R = A.getDate();
     // var date = new Date();
     // var timeStamp = date.getTime();
     // var day = date.getDay()
@@ -33,5 +34,26 @@ function showInput() {
     // display.appendChild(linebreak);
     theForm.reset();
     $("#newPost").append(commentBlock);
+
+}
+
+// function showChat(id) {
+//     if (id == "cs149") {
+//         x = document.getElementById("cs149");
+//     } else if (id == "cs159") {
+//         x = document.getElementById("cs159");
+//     }
+
+//     if (x.style.display === "none") {
+//         x.style.display = "block";
+//     } else {
+//         x.style.display = "none";
+//     }
+// }
+
+
+function getDate() {
+    var A = new Date();
+    var R = A.getDate();
 
 }
