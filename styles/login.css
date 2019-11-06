@@ -26,8 +26,7 @@ html {
     margin: 40px 8px 10px 8px; 
     color: #cccccc;
   }
-  
-  
+
   
   /* STRUCTURE */
   
@@ -39,6 +38,7 @@ html {
     width: 100%;
     min-height: 100%;
     padding: 20px;
+    /* margin-top: 200px; */
   }
   
   #formContent {

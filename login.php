@@ -1,6 +1,6 @@
 <?php
 
-echo "made it";
+echo "made it \n";
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
 
