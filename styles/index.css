@@ -2,3 +2,40 @@
     color: rgb(109, 109, 255);
 }
 
+li {
+    list-style: none;
+    background: #3c9dd1;
+    color: #fff;
+    height: 0;
+    line-height: 2em;
+    margin: 0;
+    padding: 0 0.5em;
+    overflow: hidden;
+    width: 10em;
+  }
+  
+  li.show {
+    height: 2em;
+    margin: 2px 0;
+  }
+
+  .swing {
+    perspective: 100px;
+  }
+
+  .swing li {
+    opacity: 0;
+    transform: rotateX(-90deg);
+    transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+  }
+  
+  .swing li.show {
+    opacity: 1;
+    transform: none;
+    transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+  }
+
+  #current_user{
+    color: white;
+    margin-right: 5px;
+  }

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,22 +63,29 @@
                     <a class="nav-link" href="./ask-question.html">Ask a Question</a>
                 </li>
             </ul>
-            <a class="btn btn-outline-primary" href="./login.html" role="button">Sign In | Register</a>
+            <div id="current_user" style="color: white; margin-right: 5px;">
+                <?php if($_SESSION["loggedin"] === true) {
+                        echo "Welcome " . $_SESSION["eid"];    
+                    }
+                ?>
+            </div>
+            <div>
+                <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
+                <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
+            </div>
         </div>
     </nav>
     <!-- navbar stuff ends -->
 
+
+    
     <!-- <div class="container"> -->
     <!-- <div class="row" style="margin-top: 300px;"> -->
     <div style="margin-top: 300px;">
-        <h1>Lab Calendar</h1>
         <div id='ta_cal'></div>
-        
-        
-
     </div>
 
-        <div id="help-queue" style="margin-top: 100px;">
+    <div id="help-queue" style="margin-top: 100px;">
             
         <table id="queue-table" class="row justify-content-center">
 
@@ -102,10 +112,17 @@
                         <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
                     </div>
                 </form>
+            </div>
         </div>
     </div>
 
+    <!-- Fancy add to list with animation -->
+    <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
     
+    <ul id="list" class="swing">
+        <li class="show">List item</li>
+        <li class="show">List item</li>
+    </ul>
 
 
 
@@ -125,7 +142,7 @@
     <script type="text/javascript" src="calendar_scripts.js"></script>
     <script type="text/javascript" src="queue_scripts.js"></script>
     <script> load_calendar('ta_cal'); </script>
-
+    <!-- <script type="text/javascript" src="changeButton.js"></script> -->
 </body>
 
 </html>
