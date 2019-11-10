@@ -11,7 +11,7 @@ if (!empty($username)){
     if (!empty($password)){
         $host = "localhost";
         $dbusername = "root";
-        $dbpassword = "";
+        $dbpassword = "passsword";
         $dbname = "webportal_db";
         // Create connection
         $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname);
