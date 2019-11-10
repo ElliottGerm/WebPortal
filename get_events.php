@@ -2,12 +2,12 @@
 require_once "config.php";
 
 // Create connection
-function get_users()
+function get_events()
 {
     global $link;
     $items = array();
 
-    $sql = "select * from webportal_db.users";
+    $sql = "select * from webportal_db.events";
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
         exit();
@@ -15,7 +15,7 @@ function get_users()
     if ($result = $link->query($sql)) {
         // printf("Select returned %d rows.\n", $result->num_rows);
         while($row = $result->fetch_assoc()) {
-            $items[] = $row["eid"];
+            $items[] = $row;
         }
         /* free result set */
         $result->close();

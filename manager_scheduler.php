@@ -73,8 +73,17 @@ include("get_events.php");
     </div>
 
     <!-- </div> -->
-    <form method="post">
+    <form method="post" action="add_event.php">
         <div class="form-group">
+            <label for="title">User: </label>
+            <select name="title" id="title">
+                <?php
+                    foreach(get_users() as $user) {
+                        echo '<option>' . $user . '</option>';
+                    }
+                ?>
+            </select>
+            <br>
             <label for="start_date">Start: </label>
             <input type="date" name="start_date" id="start_date">
             <select name="start_time" id="start_time">
