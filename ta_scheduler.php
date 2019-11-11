@@ -2,8 +2,8 @@
 <html lang="en">
 
 <?php
-include("get_users.php");
-include("get_events.php");
+// include("get_users.php");
+// include("get_events.php");
 ?>
 
 <head>
@@ -121,28 +121,27 @@ include("get_events.php");
     <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
     <!-- <script> load_calendar('ta_cal'); </script> -->
 
-    <?php foreach(get_events() as $event) {
-        echo $event["title"];
-    }?>
-
     <script>
-        
-        events = [
-            <?php
-                
-                foreach(get_events() as $event) {
-            ?>
-                {
-                    title: "<?php echo $event["title"];?>",
-                    start: "<?php echo $event["start"];?>",
-                    end: "<?php echo $event["end"];?>"
-                },
-            <?php
-                }
-            ?>
+                <?php echo "hello";?>
+        events = [{
+                title: 'Business Lunch',
+                start: '2019-11-03T13:00:00',
+                end: '2019-11-07T13:00:00',
+                constraint: 'businessHours'
+            },
+            {
+                title: 'Meeting',
+                start: '2019-11-13T11:00:00',
+                constraint: 'availableForMeeting', // defined below
+                color: '#257e4a'
+            }
         ]
-
         load_calendar('ta_cal', events);
+
+
+
+        
+        
     </script>
 
 </body>

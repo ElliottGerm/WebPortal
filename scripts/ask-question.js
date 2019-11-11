@@ -23,8 +23,8 @@ function showInput() {
     // var year = date.getFullYear()
     // timeStamp = day + "/" + month + "/" + year
     event.preventDefault()
-    var userInput = document.getElementById("richtext_container").value;
-    var commentBlock = '<div id="display"><p>' + userInput + '</p></div> ';
+    var userInput = document.getElementById("userInput").value;
+    var commentBlock = '<div id="display">' + userInput + '</div> ';
 
     // var display = document.getElementById("display");
     // var display = getElementsByClassName("display-area");

@@ -6,10 +6,7 @@
   margin-right: 5px;
 }
 
-#ta_view{
+#ta_view, #manager_view, #ask_view{ 
   display: none;
 }
 
-#manager_view{
-  display: none;
-}
