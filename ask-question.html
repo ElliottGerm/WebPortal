@@ -8,8 +8,11 @@
     <title>TAPortal-Ask-Question</title>
     <link href="./styles/ask-question.css" type="text/css" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdn.dhtmlx.com/richtext/1.0/richtext.css" type="text/css">
+    <script src="https://cdn.dhtmlx.com/richtext/1.0/richtext.js"></script>
 </head>
 
 <body>
@@ -17,8 +20,9 @@
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">TAPortal</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -46,33 +50,46 @@
                 <span class="badge badge-pill badge-secondary">CS 261</span>
             </div>
         </div>
-        <div id="cs149">
-            <div class="row justify-content-center" id="newPost">
-
-            </div>
-
-            <div class="row justify-content-center" style="margin-top: 50px;">
-                <form onsubmit="showInput()" id="theForm">
-                    <div class="form-group">
-                        <textarea class="form-control" id="userInput" rows="6" placeholder="Ask a question"></textarea>
-                        <button type="submit" class="btn btn-primary btn-sm float-right mt-2">Post Reply</button>
-                        <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
-                    </div>
-                </form>
-            </div>
-
+        <div class="row justify-content-center" id="newPost">
 
         </div>
+        <div class="row">
+                <div id="richtext_container" style="height: 300px; width: 300px;"></div>
+        </div>
+        <button onclick="showInput()"class="btn btn-primary btn-sm float-right mt-2">Post Reply</button>
+
+        <!-- <div class="row justify-content-center" style="margin-top: 50px;">
+            <form onsubmit="showInput()" id="theForm">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-sm float-right mt-2">Post Reply</button>
+                    <textarea class="form-control" id="userInput" rows="6" placeholder="Ask a question"></textarea>
+                    <button type="submit" class="btn btn-primary btn-sm float-right mt-2">Post Reply</button>
+                    <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button>
+                </div>
+            </form>
+        </div> -->
+    </div>
+    <script>
+        // creating dhtmlxRichText 
+        var richtext = new dhx.Richtext("richtext_container");
+
+    </script>
 
 
-        <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="./ask-question.js"></script>
+    <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./scripts/ask-question.js"></script>
 </body>
 
 </html>

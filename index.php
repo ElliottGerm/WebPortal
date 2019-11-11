@@ -1,5 +1,9 @@
 <?php
+    $_SESSION["eid"] = "";
+    $_SESSION["loggedin"] = "";
+    $_SESSION["role"] = "";
     session_start();
+    include("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +32,6 @@
     <script src='packages/timegrid/main.js'></script>
     <script src='packages/list/main.js'></script>
 
-
-
     <style>
         body {
             margin: 40px 10px;
@@ -43,7 +45,6 @@
             margin: 0 auto;
         }
     </style>
-
 </head>
 
 <body>
@@ -62,13 +63,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./ask-question.html">Ask a Question</a>
                 </li>
+                <li class="nav-item" id="ta_view">
+                    <a class="nav-link" href="./ta_scheduler.php">My Schedule</a>
+                </li>
             </ul>
             <div id="current_user" style="color: white; margin-right: 5px;">
-                <?php if($_SESSION["loggedin"] === true) {
-                        echo "Welcome " . $_SESSION["eid"];    
+                <?php 
+                    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+
+                        echo "Welcome " . $_SESSION["eid"]; 
+                        echo " Role: " . $_SESSION["role"];   
+                        echo '<script>role($_SESSION["role"]);</script>';
                     }
                 ?>
             </div>
+            <!-- <script type="text/javascript">
+                function hide(role)
+                {
+                    if()
+                    var role = '<%= $_SESSION["role"] %>';
+                    alert(role );
+                }
+            </script> -->
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
                 <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
@@ -139,10 +155,12 @@
     <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 
-    <script type="text/javascript" src="calendar_scripts.js"></script>
-    <script type="text/javascript" src="queue_scripts.js"></script>
+    <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
+    <script type="text/javascript" src="./scripts/queue_scripts.js"></script>
     <script> load_calendar('ta_cal'); </script>
     <!-- <script type="text/javascript" src="changeButton.js"></script> -->
+    <script type="text/javascript" src="./scripts/role.js"></script>
+
 </body>
 
 </html>

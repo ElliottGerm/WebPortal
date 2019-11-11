@@ -112,7 +112,7 @@
     <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 
-    <script type="text/javascript" src="calendar_scripts.js"></script>
+    <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
     <script> load_calendar('ta_cal'); </script>
 
 </body>

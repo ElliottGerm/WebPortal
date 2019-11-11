@@ -23,7 +23,7 @@ function showInput() {
     // var year = date.getFullYear()
     // timeStamp = day + "/" + month + "/" + year
     event.preventDefault()
-    var userInput = document.getElementById("userInput").value;
+    var userInput = document.getElementById("richtext_container").value;
     var commentBlock = '<div id="display"><p>' + userInput + '</p></div> ';
 
     // var display = document.getElementById("display");
@@ -37,19 +37,7 @@ function showInput() {
 
 }
 
-// function showChat(id) {
-//     if (id == "cs149") {
-//         x = document.getElementById("cs149");
-//     } else if (id == "cs159") {
-//         x = document.getElementById("cs159");
-//     }
 
-//     if (x.style.display === "none") {
-//         x.style.display = "block";
-//     } else {
-//         x.style.display = "none";
-//     }
-// }
 
 
 function getDate() {
