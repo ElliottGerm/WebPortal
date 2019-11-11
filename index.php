@@ -16,8 +16,7 @@
     <link href="./styles/index.css" type="text/css" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -47,13 +46,13 @@
     </style>
 </head>
 
-<body>
+<body onload='showView("<?php echo $_SESSION["role"] ?>")'>
 
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">TAPortal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -62,6 +61,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./ask-question.html">Ask a Question</a>
+                </li>
+                <li class="nav-item" id="manager_view">
+                    <a class="nav-link" href="./manager_scheduler.php">Manager</a>
                 </li>
                 <li class="nav-item" id="ta_view">
                     <a class="nav-link" href="./ta_scheduler.php">My Schedule</a>
@@ -73,16 +75,20 @@
 
                         echo "Welcome " . $_SESSION["eid"]; 
                         echo " Role: " . $_SESSION["role"];   
-                        echo '<script>role($_SESSION["role"]);</script>';
+                        // echo '<div onload="showView($_SESSION["role"])"></div>';
                     }
                 ?>
             </div>
             <!-- <script type="text/javascript">
-                function hide(role)
-                {
-                    if()
-                    var role = '<%= $_SESSION["role"] %>';
-                    alert(role );
+                function showView(role) {
+                    if(role == 1){
+                        var ta_view = document.getElementById("manager_view");
+                        ta_view.style.display = "inline";
+                    } 
+                    if(role == 3){
+                        var ta_view = document.getElementById("ta_view");
+                        ta_view.style.display = "inline";
+                    } 
                 }
             </script> -->
             <div>
@@ -94,7 +100,7 @@
     <!-- navbar stuff ends -->
 
 
-    
+
     <!-- <div class="container"> -->
     <!-- <div class="row" style="margin-top: 300px;"> -->
     <div style="margin-top: 300px;">
@@ -102,7 +108,7 @@
     </div>
 
     <div id="help-queue" style="margin-top: 100px;">
-            
+
         <table id="queue-table" class="row justify-content-center">
 
             <tr>
@@ -111,7 +117,7 @@
                 <th>Class Number</th>
             </tr>
         </table>
-        
+
 
         <div id="nameEntry">
 
@@ -133,12 +139,12 @@
     </div>
 
     <!-- Fancy add to list with animation -->
-    <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
-    
+    <!-- <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
+
     <ul id="list" class="swing">
         <li class="show">List item</li>
         <li class="show">List item</li>
-    </ul>
+    </ul> -->
 
 
 
@@ -157,8 +163,22 @@
 
     <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
     <script type="text/javascript" src="./scripts/queue_scripts.js"></script>
-    <script> load_calendar('ta_cal'); </script>
-    <!-- <script type="text/javascript" src="changeButton.js"></script> -->
+    <script>
+        events = [{
+                title: 'Business Lunch',
+                start: '2019-11-03T13:00:00',
+                end: '2019-11-07T13:00:00',
+                constraint: 'businessHours'
+            },
+            {
+                title: 'Meeting',
+                start: '2019-11-13T11:00:00',
+                constraint: 'availableForMeeting', // defined below
+                color: '#257e4a'
+            }
+        ]
+        load_calendar('ta_cal', events);
+    </script>
     <script type="text/javascript" src="./scripts/role.js"></script>
 
 </body>

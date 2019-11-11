@@ -95,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("location: login.php");
             } else {
                 echo "Something went wrong. Please try again later.";
+                echo mysqli_stmt_error($stmt);
             }
         }
 

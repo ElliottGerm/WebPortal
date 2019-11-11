@@ -56,8 +56,8 @@ include("get_events.php");
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <li class="nav-item" id="ta_view">
-                    <a class="nav-link" href="./ta_scheduler.php">My Schedule <span class="sr-only">(current)</span></a>
+                <li class="nav-item" id="manager_view">
+                    <a class="nav-link" href="./manager_scheduler.php">Manager <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <div>
@@ -75,8 +75,17 @@ include("get_events.php");
     </div>
 
     <!-- </div> -->
-    <form method="post">
+    <form method="post" action="add_event.php">
         <div class="form-group">
+            <label for="title">User: </label>
+            <select name="title" id="title">
+                <?php
+                    foreach(get_users() as $user) {
+                        echo '<option>' . $user . '</option>';
+                    }
+                ?>
+            </select>
+            <br>
             <label for="start_date">Start: </label>
             <input type="date" name="start_date" id="start_date">
             <select name="start_time" id="start_time">
@@ -118,18 +127,13 @@ include("get_events.php");
     <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 
-    <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
-    <!-- <script> load_calendar('ta_cal'); </script> -->
+    <script type="text/javascript" src="calendar_scripts.js"></script>
 
-    <?php foreach(get_events() as $event) {
-        echo $event["title"];
-    }?>
+    
 
     <script>
-        
         events = [
             <?php
-                
                 foreach(get_events() as $event) {
             ?>
                 {
