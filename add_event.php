@@ -1,15 +1,4 @@
 <?php
-// $host = "localhost";
-// $dbusername = "root";
-// $dbpassword = "password";
-// $dbname = "webportal_db";
-// // Create connection
-// $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
-
-// if (mysqli_connect_error()) {
-//     die('Connect Error (' . mysqli_connect_errno() . ') '
-//         . mysqli_connect_error());
-// }
 
 require_once "config.php";
 
@@ -20,12 +9,14 @@ $start_date = filter_input(INPUT_POST, 'start_date');
 $start_time = filter_input(INPUT_POST, 'start_time');
 $end_date = filter_input(INPUT_POST, 'end_date');
 $end_time = filter_input(INPUT_POST, 'end_time');
+$color = filter_input(INPUT_POST, 'color');
 
 echo $title;
 echo $start_date;
 echo $start_time;
 echo $end_date;
 echo $end_time;
+echo $color;
 
 $start = $start_date . 'T' . $start_time;
 
@@ -34,6 +25,21 @@ echo $start;
 $end = $end_date . 'T' . $end_time;
 
 echo $end;
+
+const colors = [
+    'Dark Green' => '#257e4a',
+    'Light Green' => '#8eff45',
+    'Blue' => '#0055ff',
+    'Pink' => '#ffc0cb',
+    'Light Orange' => '#ffb347',
+    'Light Purple' => '#b19cd9',
+    'Cyan' => '#00ffff',
+    'Light Yellow' => '#fdff87',
+    'Light Red' => '#ff7f7f',
+    'Light Brown' => '#c145ff'
+];
+
+$colorHash = colors[$color];
 
 $sql = "SELECT EXISTS (SELECT 1 FROM webportal_db.events)";
 
@@ -63,20 +69,14 @@ if ($isEmpty != 0) {
     }
 }
 
-// $sql = "INSERT INTO webportal_db.events (eventid, title, start, end)
-//     VALUES ('.$eventId.','".$title."','".$start."','".$end."')";
-
-//     $result = mysqli_query($link,$sql);
-
-$newEvent = "insert into webportal_db.events (eventid, title, start, end) values (?, ?, ?, ?)";
-// printf("%s %d", $question, $author);
+$newEvent = "insert into webportal_db.events (eventid, title, start, end, color) values (?, ?, ?, ?, ?)";
 if ($link->connect_errno) {
     printf("Connect failed: %s\n", $link->connect_error);
     exit();
 }
 
 $stmt = $link->prepare($newEvent);
-$stmt->bind_param("isss", $eventId, $title, $start, $end);
+$stmt->bind_param("issss", $eventId, $title, $start, $end, $colorHash);
 $stmt->execute();
 
 $newId = $link->insert_id;

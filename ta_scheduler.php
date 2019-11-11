@@ -128,7 +128,8 @@ include("get_events.php");
                 {
                     title: "<?php echo $event["title"];?>",
                     start: "<?php echo $event["start"];?>",
-                    end: "<?php echo $event["end"];?>"
+                    end: "<?php echo $event["end"];?>",
+                    color: "<?php echo $event["color"]?>"
                 },
             <?php
                 }

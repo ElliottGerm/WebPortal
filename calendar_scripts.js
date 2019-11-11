@@ -39,9 +39,11 @@ function load_calendar(cal_id, events) {
             ]
         });
 
-        events.forEach(element => {
-            calendar.addEvent(element)
-        })
+        if (events != undefined) {
+            events.forEach(element => {
+                calendar.addEvent(element)
+            })
+        }
 
         calendar.render();
     });

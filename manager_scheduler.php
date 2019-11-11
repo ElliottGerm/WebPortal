@@ -78,9 +78,9 @@ include("get_events.php");
             <label for="title">User: </label>
             <select name="title" id="title">
                 <?php
-                    foreach(get_users() as $user) {
-                        echo '<option>' . $user . '</option>';
-                    }
+                foreach (get_users() as $user) {
+                    echo '<option>' . $user . '</option>';
+                }
                 ?>
             </select>
             <br>
@@ -107,6 +107,20 @@ include("get_events.php");
                             . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
                 ?>
             </select>
+            <br>
+            <label for="color">Color: </label>
+            <select name="color" id="color">
+                <?php
+                const colors = array(
+                    'Dark Green', 'Light Green', 'Blue', 'Pink', 'Light Orange', 'Light Purple',
+                    'Cyan', 'Light Yellow', 'Light Red', 'Light Brown'
+                );
+                foreach (colors as $color) {
+                    echo '<option>' . $color . '</option>';
+                }
+                ?>
+            </select>
+
             <input type="submit" name="submit" value="submit">
         </div>
     </form>
@@ -127,22 +141,22 @@ include("get_events.php");
 
     <script type="text/javascript" src="calendar_scripts.js"></script>
 
-    
-
     <script>
         events = [
             <?php
-                foreach(get_events() as $event) {
-            ?>
-                {
-                    title: "<?php echo $event["title"];?>",
-                    start: "<?php echo $event["start"];?>",
-                    end: "<?php echo $event["end"];?>"
+            // TODO: CHECK IF THE RESULTS OF get_events() IS NULL OR EMPTY
+            foreach (get_events() as $event) {
+                ?> {
+                    title: "<?php echo $event["title"]; ?>",
+                    start: "<?php echo $event["start"]; ?>",
+                    end: "<?php echo $event["end"]; ?>",
+                    color: "<?php echo $event["color"]?>"
                 },
             <?php
-                }
+            }
             ?>
         ]
+
 
         load_calendar('ta_cal', events);
     </script>
