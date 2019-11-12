@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TAPortal-TA Scheduler</title>
-    <link href="./styles/index.css" type="text/css" rel="stylesheet">
+    <link href="./styles/ta_scheduler.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="your_website_domain/css_root/flaticon.css">
 
     <!-- Bootstrap CSS -->
@@ -46,18 +46,18 @@
 
 <body>
     <!-- Navbar stuff starts -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">TAPortal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <li class="nav-item" id="ta_view">
-                    <a class="nav-link" href="./ta_scheduler.php">My Schedule <span class="sr-only">(current)</span></a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./ta_scheduler.php">My Schedule<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <div>
@@ -66,7 +66,384 @@
             </div>
         </div>
     </nav>
+
     <!-- navbar stuff ends -->
+    <div style="margin-top: 150px;">
+        <div class="row justify-content-center">
+            <div>
+                <h5 class="dayHeadings">Monday</h5>
+                <div class="boxes">
+                    <p>Start:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">1:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>End:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">1:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <h5 class="dayHeadings">Tuesday </h5>
+                <div class="boxes">
+                    <p>Start:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>End:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <h5 class="dayHeadings">Wednesday</h5>
+                <div class="boxes">
+                    <p>Start:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>End:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <h5 class="dayHeadings">Thursday</h5>
+                <div class="boxes">
+                    <p>Start:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>End:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <h5 class="dayHeadings">Friday</h5>
+                <div class="boxes">
+                    <p>Start:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>End:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <h5 class="dayHeadings">Saturday</h5>
+                <div class="boxes">
+                    <p>Start:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>End:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <h5 class="dayHeadings">Sunday</h5>
+                <div class="boxes">
+                    <p>Start:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>End:
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="1:00">0:00</option>
+                                <option value="2:00">2:00</option>
+                                <option value="3:00">3:00</option>
+                                <option value="3:00">4:00</option>
+                                <option value="3:00">5:00</option>
+                                <option value="3:00">6:00</option>
+                                <option value="3:00">7:00</option>
+                                <option value="3:00">8:00</option>
+                                <option value="3:00">9:00</option>
+                                <option value="3:00">10:00</option>
+                                <option value="3:00">11:00</option>
+                                <option value="3:00">12:00</option>
+                            </select>
+                        </span>
+                        <span>
+                            <select class="drop-down">
+                                <option selected value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- <div class="container"> -->
     <!-- <div class="row" style="margin-top: 300px;"> -->
@@ -122,7 +499,7 @@
     <!-- <script> load_calendar('ta_cal'); </script> -->
 
     <script>
-                <?php echo "hello";?>
+        <?php echo "hello"; ?>
         events = [{
                 title: 'Business Lunch',
                 start: '2019-11-03T13:00:00',
@@ -137,11 +514,6 @@
             }
         ]
         load_calendar('ta_cal', events);
-
-
-
-        
-        
     </script>
 
 </body>
