@@ -13,7 +13,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 
 // Include config file
-require_once "config.php";
+// require_once "config.php";
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -143,7 +143,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+                <img src="styles/cs_logo.png" id="Logo" alt="User Logo" />
             </div>
 
             <!-- Login Form -->

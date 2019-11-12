@@ -139,8 +139,12 @@ $events = get_events();
             }
             ?>
         ]
-
         load_calendar('ta_cal', events);
+
+
+
+        
+        
     </script>
 
 </body>

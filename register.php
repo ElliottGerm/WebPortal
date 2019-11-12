@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "config.php";
+// require_once "config.php";
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = $fname = $lname = "";
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-    <link rel="stylesheet" type="text/css" href="./styles/register.css">
+    <link rel="stylesheet" type="text/css" href="styles/register.css">
 </head>
 
 <body>
@@ -153,12 +153,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
     <!-- navbar stuff ends -->
 
-
+    <div class="wrapper fallingContainer">
     <div class="card bg-light" style="margin-top: 100px;">
         <article class="card-body mx-auto" style="max-width: 400px;">
+        <div class="fadingContainer">
             <h4 class="card-title mt-3 text-center">Create Account</h4>
             <p class="text-center">Get started with your free account</p>
-
+                <p>
+                    <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
+                    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+                </p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                 <!-- EID / USERNAME -->
@@ -166,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input type="text" name="eid" class="form-control" placeholder="eid" value="<?php echo $username; ?>">
+                    <input type="text" name="eid" class="form-control" placeholder="JMU EID" value="<?php echo $username; ?>">
                     <span class="help-block"><?php echo $username_err; ?></span>
                 </div>
                 <!-- FIRST NAME -->
@@ -174,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input type="text" name="fname" class="form-control" placeholder="First name">
+                    <input type="text" name="fname" class="form-control" placeholder="First Name">
                     <span class="help-block"><?php echo $fname_err; ?></span>
                 </div>
                 <!-- LAST NAME -->
@@ -182,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input type="text" name="lname" class="form-control" placeholder="Last name" >
+                    <input type="text" name="lname" class="form-control" placeholder="Last Name" >
                     <span class="help-block"><?php echo $lname_err; ?></span>
                 </div>
                 <!-- PASSWORD -->
@@ -190,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input type="password" name="password" class="form-control" placeholder="Create password" value="<?php echo $password; ?>">
+                    <input type="password" name="password" class="form-control" placeholder="Create Password" value="<?php echo $password; ?>">
                     <span class="help-block"><?php echo $password_err; ?></span>
                 </div>
                 <!-- CONFIRM PASSWORD -->
@@ -198,7 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm password" value="<?php echo $confirm_password; ?>">
+                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" value="<?php echo $confirm_password; ?>">
                     <span class="help-block"><?php echo $confirm_password_err; ?></span>
                 </div>
 
@@ -215,6 +219,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
 
         </article>
+    </div>
+    </div>
     </div>
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->

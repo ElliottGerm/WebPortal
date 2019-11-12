@@ -3,7 +3,7 @@
     $_SESSION["loggedin"] = "";
     $_SESSION["role"] = "";
     session_start();
-    include("config.php");
+    // include("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +46,7 @@
     </style>
 </head>
 
-<body onload='showView("<?php echo $_SESSION["role"] ?>")'>
+<body onload='showView("<?php echo $_SESSION["role"] ?>", "<?php echo $_SESSION["eid"] ?>")'>
 
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -59,7 +59,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="ask_view">
                     <a class="nav-link" href="./ask-question.html">Ask a Question</a>
                 </li>
                 <li class="nav-item" id="manager_view">
@@ -80,20 +80,34 @@
                 ?>
             </div>
             <!-- <script type="text/javascript">
-                function showView(role) {
+                function showView(role, eid) {
+
+                    event.preventDefault()
+
+                    console.log("made it to inline script tag");
+
                     if(role == 1){
                         var ta_view = document.getElementById("manager_view");
                         ta_view.style.display = "inline";
                     } 
-                    if(role == 3){
+                    if(role == 2){
                         var ta_view = document.getElementById("ta_view");
                         ta_view.style.display = "inline";
                     } 
+                    if(role == 3){
+                        var ask_view = document.getElementById("ask_view");
+                        ask_view.style.display = "inline";
+                        var logoutButton = document.getElementById("signOutButton");
+                    } 
+                    if(eid != "" || eid == null){
+                        console.log("made it in if inside of script tag");
+                        logoutButton.classList.remove("disabled");
+                    }
                 }
             </script> -->
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
-                <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
+                <a class="btn btn-outline-secondary disabled" id="signOutButton" href="./logout.php" role="button">Logout</a>
             </div>
         </div>
     </nav>
@@ -136,6 +150,33 @@
                 </form>
             </div>
         </div>
+        <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small>3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small>Donec id elit non mi porta.</small>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small class="text-muted">3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small class="text-muted">3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
+</div>
+
     </div>
 
     <!-- Fancy add to list with animation -->
