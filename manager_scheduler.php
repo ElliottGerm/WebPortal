@@ -4,6 +4,9 @@
 <?php
 include("get_users.php");
 include("get_events.php");
+
+$events = get_events();
+$users = get_users();
 ?>
 
 <head>
@@ -28,6 +31,7 @@ include("get_events.php");
 
     <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./scripts/validate_form.js"></script>
 
     <style>
         body {
@@ -54,14 +58,16 @@ include("get_events.php");
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item" id="manager_view">
+                    <a class="nav-link" href="./manager_scheduler.php">Manager <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <a class="btn btn-outline-primary" href="./login.php" role="button">Sign In | Register</a>
-            <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
+            <div>
+                <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
+                <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
+            </div>
         </div>
     </nav>
     <!-- navbar stuff ends -->
@@ -72,13 +78,14 @@ include("get_events.php");
         <div id='ta_cal'></div>
     </div>
 
+    <!-- <?php if (!empty($users)) { } ?> -->
     <!-- </div> -->
-    <form method="post" action="add_event.php">
+    <form method="post" action="add_event.php" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="title">User: </label>
             <select name="title" id="title">
                 <?php
-                foreach (get_users() as $user) {
+                foreach ($users as $user) {
                     echo '<option>' . $user . '</option>';
                 }
                 ?>
@@ -112,7 +119,7 @@ include("get_events.php");
             <select name="color" id="color">
                 <?php
                 const colors = array(
-                    'Dark Green', 'Light Green', 'Blue', 'Pink', 'Light Orange', 'Light Purple',
+                    'Blue', 'Magenta', 'Light Green', 'Pink', 'Light Orange', 'Light Purple',
                     'Cyan', 'Light Yellow', 'Light Red', 'Light Brown'
                 );
                 foreach (colors as $color) {
@@ -120,10 +127,31 @@ include("get_events.php");
                 }
                 ?>
             </select>
+            <br>
 
-            <input type="submit" name="submit" value="submit">
+            <input type="submit" name="submit" value="Add Shift">
         </div>
     </form>
+
+    <br>
+
+    <?php if (!empty($events)) { ?>
+        <form method="post" action="remove_event.php">
+            <label for="remove_event">Remove Shift: </label>
+            <select name="remove_event" id="remove_event">
+                <?php
+                    foreach ($events as $event) {
+                        echo '<option value =' . $event["eventid"] . '>' . 'Shift ' . $event["eventid"] . ': ' . $event["title"] .
+                            '; ' . $event["start"] . ' - ' . $event["end"] . '</option>';
+                    }
+                    ?>
+            </select>
+
+            <br>
+
+            <input type="submit" name="submit" value="Remove Shift">
+        </form>
+    <?php } ?>
     <!-- </div> -->
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
@@ -139,24 +167,36 @@ include("get_events.php");
     <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 
-    <script type="text/javascript" src="calendar_scripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        if ($('#start_date')[0].type != 'date') $('#start_date').datepicker();
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        if ($('#end_date')[0].type != 'date') $('#end_date').datepicker();
+    </script>
+
+    <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
 
     <script>
         events = [
+            <?php if (!empty($events)) { ?>
+                <?php
+                    // TODO: CHECK IF THE RESULTS OF get_events() IS NULL OR EMPTY
+                    foreach ($events as $event) {
+                        ?> {
+                        title: "<?php echo $event["title"];
+                                        echo " (Shift " . $event["eventid"] . ")" ?>",
+                        start: "<?php echo $event["start"]; ?>",
+                        end: "<?php echo $event["end"]; ?>",
+                        color: "<?php echo $event["color"] ?>"
+                    },
             <?php
-            // TODO: CHECK IF THE RESULTS OF get_events() IS NULL OR EMPTY
-            foreach (get_events() as $event) {
-                ?> {
-                    title: "<?php echo $event["title"]; ?>",
-                    start: "<?php echo $event["start"]; ?>",
-                    end: "<?php echo $event["end"]; ?>",
-                    color: "<?php echo $event["color"]?>"
-                },
-            <?php
+                }
             }
             ?>
         ]
-
 
         load_calendar('ta_cal', events);
     </script>

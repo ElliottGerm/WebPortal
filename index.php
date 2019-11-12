@@ -1,5 +1,9 @@
 <?php
-session_start();
+    $_SESSION["eid"] = "";
+    $_SESSION["loggedin"] = "";
+    $_SESSION["role"] = "";
+    session_start();
+    include("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +31,6 @@ session_start();
     <script src='packages/timegrid/main.js'></script>
     <script src='packages/list/main.js'></script>
 
-
-
     <style>
         body {
             margin: 40px 10px;
@@ -42,10 +44,9 @@ session_start();
             margin: 0 auto;
         }
     </style>
-
 </head>
 
-<body>
+<body onload='showView("<?php echo $_SESSION["role"] ?>")'>
 
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -61,13 +62,35 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-link" href="./ask-question.html">Ask a Question</a>
                 </li>
+                <li class="nav-item" id="manager_view">
+                    <a class="nav-link" href="./manager_scheduler.php">Manager</a>
+                </li>
+                <li class="nav-item" id="ta_view">
+                    <a class="nav-link" href="./ta_scheduler.php">My Schedule</a>
+                </li>
             </ul>
             <div id="current_user" style="color: white; margin-right: 5px;">
-                <?php if ($_SESSION["loggedin"] === true) {
-                    echo "Welcome " . $_SESSION["eid"];
-                }
+                <?php 
+                    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+
+                        echo "Welcome " . $_SESSION["eid"]; 
+                        echo " Role: " . $_SESSION["role"];   
+                        // echo '<div onload="showView($_SESSION["role"])"></div>';
+                    }
                 ?>
             </div>
+            <!-- <script type="text/javascript">
+                function showView(role) {
+                    if(role == 1){
+                        var ta_view = document.getElementById("manager_view");
+                        ta_view.style.display = "inline";
+                    } 
+                    if(role == 3){
+                        var ta_view = document.getElementById("ta_view");
+                        ta_view.style.display = "inline";
+                    } 
+                }
+            </script> -->
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
                 <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
@@ -116,12 +139,12 @@ session_start();
     </div>
 
     <!-- Fancy add to list with animation -->
-    <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
+    <!-- <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
 
     <ul id="list" class="swing">
         <li class="show">List item</li>
         <li class="show">List item</li>
-    </ul>
+    </ul> -->
 
 
 
@@ -138,8 +161,8 @@ session_start();
     <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 
-    <script type="text/javascript" src="calendar_scripts.js"></script>
-    <script type="text/javascript" src="queue_scripts.js"></script>
+    <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
+    <script type="text/javascript" src="./scripts/queue_scripts.js"></script>
     <script>
         events = [{
                 title: 'Business Lunch',
@@ -156,7 +179,8 @@ session_start();
         ]
         load_calendar('ta_cal', events);
     </script>
-    <!-- <script type="text/javascript" src="changeButton.js"></script> -->
+    <script type="text/javascript" src="./scripts/role.js"></script>
+
 </body>
 
 </html>

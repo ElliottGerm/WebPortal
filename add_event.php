@@ -27,9 +27,9 @@ $end = $end_date . 'T' . $end_time;
 echo $end;
 
 const colors = [
-    'Dark Green' => '#257e4a',
+    'Blue' => '',
+    'Magenta' => '#ff00ff',
     'Light Green' => '#8eff45',
-    'Blue' => '#0055ff',
     'Pink' => '#ffc0cb',
     'Light Orange' => '#ffb347',
     'Light Purple' => '#b19cd9',
@@ -47,8 +47,8 @@ if ($link->connect_errno) {
     printf("Connect failed: %s\n", $conn->connect_error);
     exit();
 }
+
 if ($result = $link->query($sql)) {
-    // printf("Select returned %d rows.\n", $result->num_rows);
     while ($row = $result->fetch_assoc()) {
         $isEmpty = array_pop(array_reverse($row));
     }

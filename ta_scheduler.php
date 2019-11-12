@@ -4,6 +4,8 @@
 <?php
 include("get_users.php");
 include("get_events.php");
+
+$events = get_events();
 ?>
 
 <head>
@@ -54,14 +56,16 @@ include("get_events.php");
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item" id="ta_view">
+                    <a class="nav-link" href="./ta_scheduler.php">My Schedule <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <a class="btn btn-outline-primary" href="./login.php" role="button">Sign In | Register</a>
-            <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
+            <div>
+                <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
+                <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
+            </div>
         </div>
     </nav>
     <!-- navbar stuff ends -->
@@ -116,23 +120,23 @@ include("get_events.php");
     <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 
-    <script type="text/javascript" src="calendar_scripts.js"></script>
-
-    
+    <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
+    <!-- <script> load_calendar('ta_cal'); </script> -->
 
     <script>
         events = [
-            <?php
-                foreach(get_events() as $event) {
-            ?>
-                {
-                    title: "<?php echo $event["title"];?>",
-                    start: "<?php echo $event["start"];?>",
-                    end: "<?php echo $event["end"];?>",
-                    color: "<?php echo $event["color"]?>"
-                },
+            <?php if (!empty($events)) { ?>
+                <?php
+                    foreach ($events as $event) {
+                        ?> {
+                        title: "<?php echo $event["title"]; ?>",
+                        start: "<?php echo $event["start"]; ?>",
+                        end: "<?php echo $event["end"]; ?>",
+                        color: "<?php echo $event["color"] ?>"
+                    },
             <?php
                 }
+            }
             ?>
         ]
 
