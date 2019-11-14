@@ -2,6 +2,8 @@
     $_SESSION["eid"] = "";
     $_SESSION["loggedin"] = "";
     $_SESSION["role"] = "";
+    $_SESSION["fname"] = "";
+    $_SESSION["lname"] = "";
     session_start();
     // include("config.php");
 ?>
@@ -132,17 +134,25 @@
             </tr>
         </table>
 
+            
+
 
         <div id="nameEntry">
 
             <div class="row justify-content-center" style="margin-top: 50px;">
                 <form id="nameForm">
                     <div class="form-group">
-                        <input type="text" id="first" name="firstName" placeholder="First name..">
+                        <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"]?>">
+                        <br> 
+                        <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"]?>">
                         <br>
-                        <input type="text" id="last" name="lastName" placeholder="Last name..">
-                        <br>
-                        <input type="number" id="numClass" name="numClass" placeholder="Class number..">
+                        <select name="numClass" id="numClass" placeholder="Class number..">
+                            <option value="CS149">CS149</option>
+                            <option value="CS159">CS159</option>
+                            <option value="CS240">CS240</option>
+                            <option value="CS261">CS261</option>
+                            <option value="CS345">CS345</option>
+                        </select>
                         <br>
                         <button type="button" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
                         <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
@@ -185,8 +195,8 @@
     <ul id="list" class="swing">
         <li class="show">List item</li>
         <li class="show">List item</li>
-    </ul> -->
-
+    </ul> 
+            -->
 
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
