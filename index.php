@@ -1,9 +1,9 @@
 <?php
-    $_SESSION["eid"] = "";
-    $_SESSION["loggedin"] = "";
-    $_SESSION["role"] = "";
-    session_start();
-    // include("config.php");
+$_SESSION["eid"] = "";
+$_SESSION["loggedin"] = "";
+$_SESSION["role"] = "";
+session_start();
+// include("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,13 +70,13 @@
                 </li>
             </ul>
             <div id="current_user" style="color: white; margin-right: 5px;">
-                <?php 
-                    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+                <?php
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 
-                        echo "Welcome " . $_SESSION["eid"]; 
-                        echo " Role: " . $_SESSION["role"];   
-                        // echo '<div onload="showView($_SESSION["role"])"></div>';
-                    }
+                    echo "Welcome " . $_SESSION["eid"];
+                    echo " Role: " . $_SESSION["role"];
+                    // echo '<div onload="showView($_SESSION["role"])"></div>';
+                }
                 ?>
             </div>
             <!-- <script type="text/javascript">
@@ -117,75 +117,87 @@
 
     <!-- <div class="container"> -->
     <!-- <div class="row" style="margin-top: 300px;"> -->
-    <div style="margin-top: 300px;">
-        <div id='ta_cal'></div>
-    </div>
+    <div class="container-fluid">
+        <div style="margin-top: 200px;">
+            <div class="row">
+                <div class="col-8">
+                    <div id='ta_cal'></div>
+                </div>
+                <div class="col-4">
+                    <div id="help-queue">
 
-    <div id="help-queue" style="margin-top: 100px;">
+                        <table id="queue-table" class="row justify-content-center">
 
-        <table id="queue-table" class="row justify-content-center">
-
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Class Number</th>
-            </tr>
-        </table>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Class Number</th>
+                            </tr>
+                        </table>
 
 
-        <div id="nameEntry">
+                        <div id="nameEntry">
 
-            <div class="row justify-content-center" style="margin-top: 50px;">
-                <form id="nameForm">
-                    <div class="form-group">
-                        <input type="text" id="first" name="firstName" placeholder="First name..">
-                        <br>
-                        <input type="text" id="last" name="lastName" placeholder="Last name..">
-                        <br>
-                        <input type="number" id="numClass" name="numClass" placeholder="Class number..">
-                        <br>
-                        <button type="button" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
-                        <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
+                            <div class="row justify-content-center" style="margin-top: 50px;">
+                                <form id="nameForm">
+                                    <div class="form-group">
+                                        <input type="text" id="first" name="firstName" placeholder="First name..">
+                                        <br>
+                                        <input type="text" id="last" name="lastName" placeholder="Last name..">
+                                        <br>
+                                        <input type="number" id="numClass" name="numClass" placeholder="Class number..">
+                                        <br>
+                                        <button type="button" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right my-2">Join Queue</button>
+                                        <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small>3 days ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small>Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">3 days ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">3 days ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                        </div>
+
+                        <!-- Fancy add to list with animation -->
+                        <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
+
+                        <ul id="list" class="swing">
+                            <li class="show">List item</li>
+                            <li class="show">List item</li>
+                        </ul>
+
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-        <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Donec id elit non mi porta.</small>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-</div>
-
     </div>
 
-    <!-- Fancy add to list with animation -->
-    <!-- <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
 
-    <ul id="list" class="swing">
-        <li class="show">List item</li>
-        <li class="show">List item</li>
-    </ul> -->
+
+
+
 
 
 

@@ -10,6 +10,14 @@
   display: none;
 }
 
+#help-queue{
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px 0 rgba(0,0,0,0.3);
+  /* border: black solid 1px; */
+  /* margin-top: 0px; */
+  
+}
+
 /* FANCY LIST ANIMATION STUFF*/
 li {
     list-style: none;

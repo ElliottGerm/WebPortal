@@ -24,8 +24,11 @@ function showInput() {
     // timeStamp = day + "/" + month + "/" + year
     event.preventDefault()
     var userInput = document.getElementById("userInput").value;
+    userInput = userInput.replace(" ", '&nbsp;');
+    userInput = userInput.replace(/\n|\r/g, '<br>');
+    console.log(userInput);
     var commentBlock = '<div id="display">' + userInput + '</div> ';
-
+    // var commentBlock = '<div id="display"><pre>' + userInput + '</pre></div> ';
     // var display = document.getElementById("display");
     // var display = getElementsByClassName("display-area");
     // var theForm = document.getElementById("theForm");

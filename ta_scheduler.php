@@ -2,10 +2,10 @@
 <html lang="en">
 
 <?php
-include("get_users.php");
-include("get_events.php");
+// include("get_users.php");
+// include("get_events.php");
 
-$events = get_events();
+// $events = get_events();
 ?>
 
 <head>
@@ -81,15 +81,15 @@ $events = get_events();
                                 <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
-                                <option value="3:00">4:00</option>
-                                <option value="3:00">5:00</option>
-                                <option value="3:00">6:00</option>
-                                <option value="3:00">7:00</option>
-                                <option value="3:00">8:00</option>
-                                <option value="3:00">9:00</option>
-                                <option value="3:00">10:00</option>
-                                <option value="3:00">11:00</option>
-                                <option value="3:00">12:00</option>
+                                <option value="4:00">4:00</option>
+                                <option value="5:00">5:00</option>
+                                <option value="6:00">6:00</option>
+                                <option value="7:00">7:00</option>
+                                <option value="8:00">8:00</option>
+                                <option value="9:00">9:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
                             </select>
                         </span>
                         <span>
