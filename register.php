@@ -1,6 +1,6 @@
 <?php
 // Include config file
-// require_once "config.php";
+require_once "config.php";
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = $fname = $lname = "";
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Prepare an insert statement
         $sql = "INSERT INTO users (eid, fname, lname, password, role) VALUES (?, ?, ?, ?, 3)";
-        
+
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssss", $param_username, $fname, $lname, $param_password);
@@ -131,8 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">TAPortal</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -140,86 +139,83 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./ask-question.html">Ask a Question</a>
-                </li>
             </ul>
             <div>
                 <a class="btn btn-outline-primary" href="./login.php" role="button">Sign In | Register</a>
-                <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
+                <a class="btn btn-outline-secondary disabled" id="signOutButton" href="./logout.php" role="button">Logout</a>
             </div>
-            
+
         </div>
     </nav>
     <!-- navbar stuff ends -->
 
     <div class="wrapper fallingContainer">
-    <div class="card bg-light" style="margin-top: 100px;">
-        <article class="card-body mx-auto" style="max-width: 400px;">
-        <div class="fadingContainer">
-            <h4 class="card-title mt-3 text-center">Create Account</h4>
-            <p class="text-center">Get started with your free account</p>
-                <p>
-                    <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
-                    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-                </p>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div class="card bg-light" style="margin-top: 100px;">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+                <div class="fadingContainer">
+                    <h4 class="card-title mt-3 text-center">Create Account</h4>
+                    <p class="text-center">Get started with your free account</p>
+                    <p>
+                        <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i> Login via Twitter</a>
+                        <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i> Login via facebook</a>
+                    </p>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-                <!-- EID / USERNAME -->
-                <div class="form-group input-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <input type="text" name="eid" class="form-control" placeholder="JMU EID" value="<?php echo $username; ?>">
-                    <span class="help-block"><?php echo $username_err; ?></span>
-                </div>
-                <!-- FIRST NAME -->
-                <div class="form-group input-group <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <input type="text" name="fname" class="form-control" placeholder="First Name">
-                    <span class="help-block"><?php echo $fname_err; ?></span>
-                </div>
-                <!-- LAST NAME -->
-                <div class="form-group input-group <?php echo (!empty($lname_err)) ? 'has-error' : ''; ?>">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <input type="text" name="lname" class="form-control" placeholder="Last Name" >
-                    <span class="help-block"><?php echo $lname_err; ?></span>
-                </div>
-                <!-- PASSWORD -->
-                <div class="form-group input-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input type="password" name="password" class="form-control" placeholder="Create Password" value="<?php echo $password; ?>">
-                    <span class="help-block"><?php echo $password_err; ?></span>
-                </div>
-                <!-- CONFIRM PASSWORD -->
-                <div class="form-group input-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" value="<?php echo $confirm_password; ?>">
-                    <span class="help-block"><?php echo $confirm_password_err; ?></span>
-                </div>
+                        <!-- EID / USERNAME -->
+                        <div class="form-group input-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            <input type="text" name="eid" class="form-control" placeholder="JMU EID" value="<?php echo $username; ?>">
+                            <span class="help-block"><?php echo $username_err; ?></span>
+                        </div>
+                        <!-- FIRST NAME -->
+                        <div class="form-group input-group <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            <input type="text" name="fname" class="form-control" placeholder="First Name">
+                            <span class="help-block"><?php echo $fname_err; ?></span>
+                        </div>
+                        <!-- LAST NAME -->
+                        <div class="form-group input-group <?php echo (!empty($lname_err)) ? 'has-error' : ''; ?>">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                            <span class="help-block"><?php echo $lname_err; ?></span>
+                        </div>
+                        <!-- PASSWORD -->
+                        <div class="form-group input-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                            </div>
+                            <input type="password" name="password" class="form-control" placeholder="Create Password" value="<?php echo $password; ?>">
+                            <span class="help-block"><?php echo $password_err; ?></span>
+                        </div>
+                        <!-- CONFIRM PASSWORD -->
+                        <div class="form-group input-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                            </div>
+                            <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" value="<?php echo $confirm_password; ?>">
+                            <span class="help-block"><?php echo $confirm_password_err; ?></span>
+                        </div>
 
-                <!-- <div class="form-group input-group">
+                        <!-- <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                         </div>
                         <input name="email" class="form-control" placeholder="Email address" type="email">
                     </div> -->
-                <!-- SUBMIT REGISTRATION -->
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block" value="submit"> Create Account </button>
-                </div>
-            </form>
+                        <!-- SUBMIT REGISTRATION -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block" value="submit"> Create Account </button>
+                        </div>
+                    </form>
 
-        </article>
-    </div>
+            </article>
+        </div>
     </div>
     </div>
 
@@ -234,5 +230,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
-
-
