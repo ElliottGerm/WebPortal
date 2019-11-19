@@ -125,13 +125,40 @@
 
     <div id="help-queue" style="margin-top: 100px;">
 
-        <table id="queue-table" class="row justify-content-center">
+        <table id="queue-table" class="row justify-content-center"> <!-- onload="populateQueue()"-->
 
+        <?php
+        
+            $link = mysqli_connect('localhost', 'root', '', 'webportal_db');
+            $sql = "SELECT * FROM existing_queue ";
+            $result=mysqli_query($link,$sql);
+            /*if ($stmt = mysqli_prepare($link, $sql)) {
+
+                if (mysqli_stmt_execute($stmt)) {
+                    /* store result 
+                    mysqli_stmt_store_result($stmt);
+
+                } else {
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+            } */
+        ?>
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Class Number</th>
             </tr>
+
+            <?php
+               while ($row = mysqli_fetch_array($result)) {
+                   echo "<tr>";
+                   echo "<td>".$row['fname']."</td>";
+                   echo "<td>".$row['lname']."</td>";
+                   echo "<td>".$row['classnum']."</td>";
+                   echo "</tr>";
+               }
+
+            ?>
         </table>
 
             
