@@ -1,11 +1,15 @@
 <?php
-    $_SESSION["eid"] = "";
-    $_SESSION["loggedin"] = "";
-    $_SESSION["role"] = "";
-    $_SESSION["fname"] = "";
-    $_SESSION["lname"] = "";
-    session_start();
-    // include("config.php");
+$_SESSION["eid"] = "";
+$_SESSION["loggedin"] = "";
+$_SESSION["role"] = "";
+$_SESSION["fname"] = "";
+$_SESSION["lname"] = "";
+session_start();
+require_once "config.php";
+
+include("get_events.php");
+
+$events = get_events();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,13 +76,13 @@
                 </li>
             </ul>
             <div id="current_user" style="color: white; margin-right: 5px;">
-                <?php 
-                    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+                <?php
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 
-                        echo "Welcome " . $_SESSION["eid"]; 
-                        echo " Role: " . $_SESSION["role"];   
-                        // echo '<div onload="showView($_SESSION["role"])"></div>';
-                    }
+                    echo "Welcome " . $_SESSION["eid"];
+                    echo " Role: " . $_SESSION["role"];
+                    // echo '<div onload="showView($_SESSION["role"])"></div>';
+                }
                 ?>
             </div>
             <!-- <script type="text/javascript">
@@ -125,13 +129,13 @@
 
     <div id="help-queue" style="margin-top: 100px;">
 
-        <table id="queue-table" class="row justify-content-center"> <!-- onload="populateQueue()"-->
+        <table id="queue-table" class="row justify-content-center">
+            <!-- onload="populateQueue()"-->
 
-        <?php
-        
-            $link = mysqli_connect('localhost', 'root', 'password', 'webportal_db');
+            <?php
+
             $sql = "SELECT * FROM existing_queue ";
-            $result=mysqli_query($link,$sql);
+            $result = mysqli_query($link, $sql);
             /*if ($stmt = mysqli_prepare($link, $sql)) {
 
                 if (mysqli_stmt_execute($stmt)) {
@@ -142,7 +146,7 @@
                     echo "Oops! Something went wrong. Please try again later.";
                 }
             } */
-        ?>
+            ?>
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -150,18 +154,18 @@
             </tr>
 
             <?php
-               while ($row = mysqli_fetch_array($result)) {
-                   echo "<tr>";
-                   echo "<td>".$row['fname']."</td>";
-                   echo "<td>".$row['lname']."</td>";
-                   echo "<td>".$row['classnum']."</td>";
-                   echo "</tr>";
-               }
+            while ($row = mysqli_fetch_array($result)) {
+                echo "<tr>";
+                echo "<td>" . $row['fname'] . "</td>";
+                echo "<td>" . $row['lname'] . "</td>";
+                echo "<td>" . $row['classnum'] . "</td>";
+                echo "</tr>";
+            }
 
             ?>
         </table>
 
-            
+
 
 
         <div id="nameEntry">
@@ -169,9 +173,9 @@
             <div class="row justify-content-center" style="margin-top: 50px;">
                 <form id="nameForm">
                     <div class="form-group">
-                        <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"]?>">
-                        <br> 
-                        <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"]?>">
+                        <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"] ?>">
+                        <br>
+                        <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"] ?>">
                         <br>
                         <select name="numClass" id="numClass" placeholder="Class number..">
                             <option value="CS149">CS149</option>
@@ -188,31 +192,31 @@
             </div>
         </div>
         <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Donec id elit non mi porta.</small>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-</div>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small>3 days ago</small>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small>Donec id elit non mi porta.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+        </div>
 
     </div>
 
@@ -242,18 +246,20 @@
     <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
     <script type="text/javascript" src="./scripts/queue_scripts.js"></script>
     <script>
-        events = [{
-                title: 'Business Lunch',
-                start: '2019-11-03T13:00:00',
-                end: '2019-11-07T13:00:00',
-                constraint: 'businessHours'
-            },
-            {
-                title: 'Meeting',
-                start: '2019-11-13T11:00:00',
-                constraint: 'availableForMeeting', // defined below
-                color: '#257e4a'
+        events = [
+            <?php if (!empty($events)) { ?>
+                <?php
+                    foreach ($events as $event) {
+                        ?> {
+                        title: "<?php echo $event["title"]; ?>",
+                        start: "<?php echo $event["start"]; ?>",
+                        end: "<?php echo $event["end"]; ?>",
+                        color: "<?php echo $event["color"] ?>"
+                    },
+            <?php
+                }
             }
+            ?>
         ]
         load_calendar('ta_cal', events);
     </script>
