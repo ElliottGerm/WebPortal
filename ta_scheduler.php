@@ -6,6 +6,7 @@ include("get_users.php");
 include("get_events.php");
 
 $events = get_events();
+$days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 ?>
 
 <head>
@@ -30,6 +31,18 @@ $events = get_events();
 
     <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- cdn for modernizr, if you haven't included it already -->
+    <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+    <!-- polyfiller file to detect and load polyfills -->
+    <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+    <script>
+        webshims.setOptions('waitReady', false);
+        webshims.setOptions('forms-ext', {
+            types: 'date'
+        });
+        webshims.polyfill('forms forms-ext');
+    </script>
 
     <style>
         body {
@@ -72,60 +85,64 @@ $events = get_events();
     <!-- navbar stuff ends -->
     <div style="margin-top: 150px;">
         <div class="row justify-content-center">
-            <div>
-                <h5 class="dayHeadings">Monday</h5>
-                <div class="boxes">
-                    <p>Start:
-                        <span>
-                            <select class="drop-down">
-                                <option selected value="1:00">1:00</option>
-                                <option value="2:00">2:00</option>
-                                <option value="3:00">3:00</option>
-                                <option value="3:00">4:00</option>
-                                <option value="3:00">5:00</option>
-                                <option value="3:00">6:00</option>
-                                <option value="3:00">7:00</option>
-                                <option value="3:00">8:00</option>
-                                <option value="3:00">9:00</option>
-                                <option value="3:00">10:00</option>
-                                <option value="3:00">11:00</option>
-                                <option value="3:00">12:00</option>
-                            </select>
-                        </span>
-                        <span>
-                            <select class="drop-down">
-                                <option selected value="AM">AM</option>
-                                <option value="PM">PM</option>
-                            </select>
-                        </span>
-                    </p>
-                    <p>End:
-                        <span>
-                            <select class="drop-down">
-                                <option selected value="1:00">1:00</option>
-                                <option value="2:00">2:00</option>
-                                <option value="3:00">3:00</option>
-                                <option value="3:00">4:00</option>
-                                <option value="3:00">5:00</option>
-                                <option value="3:00">6:00</option>
-                                <option value="3:00">7:00</option>
-                                <option value="3:00">8:00</option>
-                                <option value="3:00">9:00</option>
-                                <option value="3:00">10:00</option>
-                                <option value="3:00">11:00</option>
-                                <option value="3:00">12:00</option>
-                            </select>
-                        </span>
-                        <span>
-                            <select class="drop-down">
-                                <option selected value="AM">AM</option>
-                                <option value="PM">PM</option>
-                            </select>
-                        </span>
-                    </p>
+            <?php
+            foreach ($days as $day) {
+                ?>
+                <div>
+                    <h5 class="dayHeadings"><?php echo $day ?></h5>
+                    <div class="boxes">
+                        <p>Start:
+                            <span>
+                                <select class="drop-down">
+                                    <option selected value="1:00">1:00</option>
+                                    <option value="2:00">2:00</option>
+                                    <option value="3:00">3:00</option>
+                                    <option value="3:00">4:00</option>
+                                    <option value="3:00">5:00</option>
+                                    <option value="3:00">6:00</option>
+                                    <option value="3:00">7:00</option>
+                                    <option value="3:00">8:00</option>
+                                    <option value="3:00">9:00</option>
+                                    <option value="3:00">10:00</option>
+                                    <option value="3:00">11:00</option>
+                                    <option value="3:00">12:00</option>
+                                </select>
+                            </span>
+                            <span>
+                                <select class="drop-down">
+                                    <option selected value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </span>
+                        </p>
+                        <p>End:
+                            <span>
+                                <select class="drop-down">
+                                    <option selected value="1:00">1:00</option>
+                                    <option value="2:00">2:00</option>
+                                    <option value="3:00">3:00</option>
+                                    <option value="3:00">4:00</option>
+                                    <option value="3:00">5:00</option>
+                                    <option value="3:00">6:00</option>
+                                    <option value="3:00">7:00</option>
+                                    <option value="3:00">8:00</option>
+                                    <option value="3:00">9:00</option>
+                                    <option value="3:00">10:00</option>
+                                    <option value="3:00">11:00</option>
+                                    <option value="3:00">12:00</option>
+                                </select>
+                            </span>
+                            <span>
+                                <select class="drop-down">
+                                    <option selected value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </span>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div>
+            <?php } ?>
+            <!-- <div>
                 <h5 class="dayHeadings">Tuesday </h5>
                 <div class="boxes">
                     <p>Start:
@@ -442,7 +459,7 @@ $events = get_events();
                         </span>
                     </p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -482,6 +499,7 @@ $events = get_events();
             <input type="submit" name="submit" value="submit">
         </div>
     </form>
+
     <!-- </div> -->
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
