@@ -129,7 +129,7 @@
 
         <?php
         
-            $link = mysqli_connect('localhost', 'root', '', 'webportal_db');
+            $link = mysqli_connect('localhost', 'root', 'password', 'webportal_db');
             $sql = "SELECT * FROM existing_queue ";
             $result=mysqli_query($link,$sql);
             /*if ($stmt = mysqli_prepare($link, $sql)) {
