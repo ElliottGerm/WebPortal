@@ -5,7 +5,7 @@
     $_SESSION["fname"] = "";
     $_SESSION["lname"] = "";
     session_start();
-    // include("config.php");
+    require_once "config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,7 +129,7 @@
 
         <?php
         
-            $link = mysqli_connect('localhost', 'root', '', 'webportal_db');
+            
             $sql = "SELECT * FROM existing_queue ";
             $result=mysqli_query($link,$sql);
             /*if ($stmt = mysqli_prepare($link, $sql)) {
@@ -181,7 +181,7 @@
                             <option value="CS345">CS345</option>
                         </select>
                         <br>
-                        <button type="button" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
+                        <button type="submit" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
                         <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
                     </div>
                 </form>
