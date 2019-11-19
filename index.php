@@ -129,7 +129,6 @@
 
         <?php
         
-            
             $sql = "SELECT * FROM existing_queue ";
             $result=mysqli_query($link,$sql);
             /*if ($stmt = mysqli_prepare($link, $sql)) {
@@ -167,8 +166,10 @@
         <div id="nameEntry">
 
             <div class="row justify-content-center" style="margin-top: 50px;">
-                <form id="nameForm">
+                <form id="nameForm" method="post" action="add_queue.php">
                     <div class="form-group">
+                        <input type="hidden" id="eid" name="EID" value="<?php echo $_SESSION["eid"]?>">
+                        <br> 
                         <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"]?>">
                         <br> 
                         <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"]?>">
