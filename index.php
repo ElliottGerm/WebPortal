@@ -2,6 +2,8 @@
     $_SESSION["eid"] = "";
     $_SESSION["loggedin"] = "";
     $_SESSION["role"] = "";
+    $_SESSION["fname"] = "";
+    $_SESSION["lname"] = "";
     session_start();
     // include("config.php");
 ?>
@@ -123,14 +125,43 @@
 
     <div id="help-queue" style="margin-top: 100px;">
 
-        <table id="queue-table" class="row justify-content-center">
+        <table id="queue-table" class="row justify-content-center"> <!-- onload="populateQueue()"-->
 
+        <?php
+        
+            $link = mysqli_connect('localhost', 'root', '', 'webportal_db');
+            $sql = "SELECT * FROM existing_queue ";
+            $result=mysqli_query($link,$sql);
+            /*if ($stmt = mysqli_prepare($link, $sql)) {
+
+                if (mysqli_stmt_execute($stmt)) {
+                    /* store result 
+                    mysqli_stmt_store_result($stmt);
+
+                } else {
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+            } */
+        ?>
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Class Number</th>
             </tr>
+
+            <?php
+               while ($row = mysqli_fetch_array($result)) {
+                   echo "<tr>";
+                   echo "<td>".$row['fname']."</td>";
+                   echo "<td>".$row['lname']."</td>";
+                   echo "<td>".$row['classnum']."</td>";
+                   echo "</tr>";
+               }
+
+            ?>
         </table>
+
+            
 
 
         <div id="nameEntry">
@@ -138,11 +169,17 @@
             <div class="row justify-content-center" style="margin-top: 50px;">
                 <form id="nameForm">
                     <div class="form-group">
-                        <input type="text" id="first" name="firstName" placeholder="First name..">
+                        <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"]?>">
+                        <br> 
+                        <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"]?>">
                         <br>
-                        <input type="text" id="last" name="lastName" placeholder="Last name..">
-                        <br>
-                        <input type="number" id="numClass" name="numClass" placeholder="Class number..">
+                        <select name="numClass" id="numClass" placeholder="Class number..">
+                            <option value="CS149">CS149</option>
+                            <option value="CS159">CS159</option>
+                            <option value="CS240">CS240</option>
+                            <option value="CS261">CS261</option>
+                            <option value="CS345">CS345</option>
+                        </select>
                         <br>
                         <button type="button" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
                         <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
@@ -185,8 +222,8 @@
     <ul id="list" class="swing">
         <li class="show">List item</li>
         <li class="show">List item</li>
-    </ul> -->
-
+    </ul> 
+            -->
 
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->

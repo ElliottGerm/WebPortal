@@ -148,7 +148,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>Start:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -172,7 +172,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>End:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -201,7 +201,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>Start:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -225,7 +225,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>End:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -254,7 +254,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>Start:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -278,7 +278,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>End:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -307,7 +307,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>Start:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -331,7 +331,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>End:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -360,7 +360,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>Start:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -384,7 +384,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>End:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -413,7 +413,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>Start:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
@@ -437,7 +437,7 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
                     <p>End:
                         <span>
                             <select class="drop-down">
-                                <option selected value="1:00">0:00</option>
+                                <option selected value="1:00">1:00</option>
                                 <option value="2:00">2:00</option>
                                 <option value="3:00">3:00</option>
                                 <option value="3:00">4:00</option>
