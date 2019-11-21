@@ -12,10 +12,6 @@ $eid = $_SESSION["eid"];
 $fname = $_SESSION["fname"];
 $lname = $_SESSION["lname"];
 $classnum = filter_input(INPUT_POST, "numClass");
-echo $eid;
-echo $_SESSION["fname"];
-echo $_SESSION["lname"];
-echo $classnum;
 
 $sql = "INSERT INTO existing_queue (eid, fname, lname, classnum) values (?, ?, ?, ?)";
 if ($link->connect_errno) {

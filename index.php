@@ -182,7 +182,7 @@
                             <option value="CS345">CS345</option>
                         </select>
                         <br>
-                        <button type="submit" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
+                        <button id = "joinButton" type="submit" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2 disabled">Join Queue</button>
                         <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
                     </div>
                 </form>
