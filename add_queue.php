@@ -1,25 +1,30 @@
 <?php
 
-$_SESSION["eid"] = "";
-$_SESSION["fname"] = "";
-$_SESSION["lname"] = "";
+
+//$_SESSION["eid"] = "";
+//$_SESSION["fname"] = "";
+//$_SESSION["lname"] = "";
 session_start();
 require_once "config.php";
 
 
-$_SESSION["eid"] = filter_input(INPUT_POST, "eid");
-$_SESSION["fname"] = filter_input(INPUT_POST, "fname");
-$_SESSION["lname"] = filter_input(INPUT_POST, "lname");
+$eid = $_SESSION["eid"];
+$fname = $_SESSION["fname"];
+$lname = $_SESSION["lname"];
 $classnum = filter_input(INPUT_POST, "numClass");
+echo $eid;
+echo $_SESSION["fname"];
+echo $_SESSION["lname"];
+echo $classnum;
 
-$newQueue = "insert into webportal_db.existing_queue (eid, fname, lname, numClass) values (?, ?, ?, ?)";
+$sql = "INSERT INTO existing_queue (eid, fname, lname, classnum) values (?, ?, ?, ?)";
 if ($link->connect_errno) {
     printf("Connect failed: %s\n", $link->connect_error);
     exit();
 }
 
-$stmt = $link->prepare($newQueue);
-$stmt->bind_param("ssss", $_SESSION["eid"], $_SESSION["fname"], $_SESSION["lname"], $classnum);
+$stmt = $link->prepare($sql);
+$stmt->bind_param("ssss", $eid, $fname, $lname, $classnum);
 $stmt->execute();
 
 $newId = $link->insert_id;
