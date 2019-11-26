@@ -6,8 +6,20 @@ include("get_users.php");
 include("get_events.php");
 
 $events = get_events();
-$days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+$days = [
+    0 => "Monday",
+    1 => "Tuesday",
+    2 => "Wednesday",
+    3 => "Thursday",
+    4 => "Friday",
+    5 => "Saturday",
+    6 => "Sunday"
+]
 ?>
+
+<script>
+
+</script>
 
 <head>
     <meta charset="UTF-8">
@@ -84,67 +96,78 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 
     <!-- navbar stuff ends -->
     <div style="margin-top: 150px;">
-        <div class="row justify-content-center">
-            <?php
-            foreach ($days as $day) {
-                ?>
-                <div>
-                    <h5 class="dayHeadings"><?php echo $day ?></h5>
-                    <div class="boxes">
-                        <p>Start:
-                            <span>
-                                <select class="drop-down">
-                                    <option selected value="N/A">N/A</option>
-                                    <option value="1:00">1:00</option>
-                                    <option value="2:00">2:00</option>
-                                    <option value="3:00">3:00</option>
-                                    <option value="3:00">4:00</option>
-                                    <option value="3:00">5:00</option>
-                                    <option value="3:00">6:00</option>
-                                    <option value="3:00">7:00</option>
-                                    <option value="3:00">8:00</option>
-                                    <option value="3:00">9:00</option>
-                                    <option value="3:00">10:00</option>
-                                    <option value="3:00">11:00</option>
-                                    <option value="3:00">12:00</option>
-                                </select>
-                            </span>
-                            <span>
-                                <select class="drop-down">
-                                    <option selected value="AM">AM</option>
-                                    <option value="PM">PM</option>
-                                </select>
-                            </span>
-                        </p>
-                        <p>End:
-                            <span>
-                                <select class="drop-down">
-                                    <option selected value="N/A">N/A</option>
-                                    <option value="1:00">1:00</option>
-                                    <option value="2:00">2:00</option>
-                                    <option value="3:00">3:00</option>
-                                    <option value="3:00">4:00</option>
-                                    <option value="3:00">5:00</option>
-                                    <option value="3:00">6:00</option>
-                                    <option value="3:00">7:00</option>
-                                    <option value="3:00">8:00</option>
-                                    <option value="3:00">9:00</option>
-                                    <option value="3:00">10:00</option>
-                                    <option value="3:00">11:00</option>
-                                    <option value="3:00">12:00</option>
-                                </select>
-                            </span>
-                            <span>
-                                <select class="drop-down">
-                                    <option selected value="AM">AM</option>
-                                    <option value="PM">PM</option>
-                                </select>
-                            </span>
-                        </p>
+
+        <form method="post" action="add_request.php">
+            <div class="row justify-content-center">
+                <?php
+
+                foreach ($days as $day) {
+                    ?>
+                    <div>
+
+                        <h5 class="dayHeadings">
+                            <?php
+                                echo $day;
+                                ?>
+                        </h5>
+                        <div class="boxes">
+                            <p>Start:
+                                <span>
+                                    <select class="drop-down" name=<?php echo 'start_' . strtolower($day); ?>>
+                                        <option selected value="N/A">N/A</option>
+                                        <option value="1:00">1:00</option>
+                                        <option value="2:00">2:00</option>
+                                        <option value="3:00">3:00</option>
+                                        <option value="4:00">4:00</option>
+                                        <option value="5:00">5:00</option>
+                                        <option value="6:00">6:00</option>
+                                        <option value="7:00">7:00</option>
+                                        <option value="8:00">8:00</option>
+                                        <option value="9:00">9:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <select class="drop-down" name=<?php echo 'start_meridiem'; ?>>
+                                        <option selected value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </span>
+                            </p>
+                            <p>End:
+                                <span>
+                                    <select class="drop-down" name=<?php echo 'end_' . strtolower($day); ?>>
+                                        <option selected value="N/A">N/A</option>
+                                        <option value="1:00">1:00</option>
+                                        <option value="2:00">2:00</option>
+                                        <option value="3:00">3:00</option>
+                                        <option value="4:00">4:00</option>
+                                        <option value="5:00">5:00</option>
+                                        <option value="6:00">6:00</option>
+                                        <option value="7:00">7:00</option>
+                                        <option value="8:00">8:00</option>
+                                        <option value="9:00">9:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <select class="drop-down" name=<?php echo 'end_meridiem'; ?>>
+                                        <option selected value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </span>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
-        </div>
+                <?php
+                } ?>
+            </div>
+            <input type="submit" name="submit" value="Submit Request">
+        </form>
     </div>
 
 
@@ -200,7 +223,6 @@ $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 
     <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
-    <!-- <script> load_calendar('ta_cal'); </script> -->
 
     <script>
         events = [

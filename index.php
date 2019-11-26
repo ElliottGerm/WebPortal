@@ -85,44 +85,13 @@ $events = get_events();
                 }
                 ?>
             </div>
-            <!-- <script type="text/javascript">
-                function showView(role, eid) {
-
-                    event.preventDefault()
-
-                    console.log("made it to inline script tag");
-
-                    if(role == 1){
-                        var ta_view = document.getElementById("manager_view");
-                        ta_view.style.display = "inline";
-                    } 
-                    if(role == 2){
-                        var ta_view = document.getElementById("ta_view");
-                        ta_view.style.display = "inline";
-                    } 
-                    if(role == 3){
-                        var ask_view = document.getElementById("ask_view");
-                        ask_view.style.display = "inline";
-                        var logoutButton = document.getElementById("signOutButton");
-                    } 
-                    if(eid != "" || eid == null){
-                        console.log("made it in if inside of script tag");
-                        logoutButton.classList.remove("disabled");
-                    }
-                }
-            </script> -->
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
                 <a class="btn btn-outline-secondary disabled" id="signOutButton" href="./logout.php" role="button">Logout</a>
             </div>
         </div>
     </nav>
-    <!-- navbar stuff ends -->
 
-
-
-    <!-- <div class="container"> -->
-    <!-- <div class="row" style="margin-top: 300px;"> -->
     <div style="margin-top: 300px;">
         <div id='ta_cal'></div>
     </div>
@@ -130,22 +99,12 @@ $events = get_events();
     <div id="help-queue" style="margin-top: 100px;">
 
         <table id="queue-table" class="row justify-content-center">
-            <!-- onload="populateQueue()"-->
 
             <?php
 
             $sql = "SELECT * FROM existing_queue ";
             $result = mysqli_query($link, $sql);
-            /*if ($stmt = mysqli_prepare($link, $sql)) {
 
-                if (mysqli_stmt_execute($stmt)) {
-                    /* store result 
-                    mysqli_stmt_store_result($stmt);
-
-                } else {
-                    echo "Oops! Something went wrong. Please try again later.";
-                }
-            } */
             ?>
             <tr>
                 <th>First Name</th>
