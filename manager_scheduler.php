@@ -2,11 +2,11 @@
 <html lang="en">
 
 <?php
-// include("get_users.php");
-// include("get_events.php");
+include("get_users.php");
+include("get_events.php");
 
-// $events = get_events();
-// $users = get_users();
+$events = get_events();
+$users = get_users();
 ?>
 
 <head>
