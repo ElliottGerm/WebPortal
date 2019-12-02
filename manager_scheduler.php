@@ -41,9 +41,9 @@ $availability_strings = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TAPortal-TA Scheduler</title>
-    <link href="./styles/index.css" type="text/css" rel="stylesheet">
+    <link href="./styles/manager_scheduler.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="your_website_domain/css_root/flaticon.css">
-
+    <link href="./styles/manager_scheduler.css" type="text/css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href='packages/core/main.css' rel='stylesheet' />
@@ -74,13 +74,6 @@ $availability_strings = [
     </script>
 
     <style>
-        body {
-            margin: 40px 10px;
-            padding: 0;
-            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-            font-size: 14px;
-        }
-
         #ta_cal {
             max-width: 900px;
             margin: 0 auto;
@@ -120,11 +113,14 @@ $availability_strings = [
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item active" id="manager_view">
                     <a class="nav-link" href="./manager_scheduler.php">Manager <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" id="stu_feedback_view">
+                    <a class="nav-link" href="./student-feedback.php">Student Feedback</a>
                 </li>
             </ul>
             <div>
@@ -141,11 +137,7 @@ $availability_strings = [
         <div id='ta_cal'></div>
     </div>
 
-    <?php
-    foreach ($requests as $request) {
-        echo $request['id'];
-    }
-    ?>
+    <h4>Student Requests</h4>
 
     <form method="post">
         <div id="selection-menu" class="vertical-menu">
@@ -243,7 +235,7 @@ $availability_strings = [
     <form method="post" action="add_event.php" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="title">User: </label>
-            <select name="title" id="title">
+            <select name="title" id="title"  style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 foreach ($users as $user) {
                     echo '<option>' . $user . '</option>';
@@ -253,7 +245,7 @@ $availability_strings = [
             <br>
             <label for="start_date">Start: </label>
             <input type="date" name="start_date" id="start_date">
-            <select name="start_time" id="start_time">
+            <select name="start_time" id="start_time" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -265,7 +257,7 @@ $availability_strings = [
             <br>
             <label for="end_date">End: </label>
             <input type="date" name="end_date" id="end_date">
-            <select name="end_time" id="end_time">
+            <select name="end_time" id="end_time" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -276,7 +268,7 @@ $availability_strings = [
             </select>
             <br>
             <label for="color">Color: </label>
-            <select name="color" id="color">
+            <select name="color" id="color" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 const colors = array(
                     'Blue', 'Magenta', 'Light Green', 'Pink', 'Light Orange', 'Light Purple',
@@ -298,7 +290,7 @@ $availability_strings = [
     <?php if (!empty($events)) { ?>
         <form method="post" action="remove_event.php">
             <label for="remove_event">Remove Shift: </label>
-            <select name="remove_event" id="remove_event">
+            <select name="remove_event" id="remove_event" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                     foreach ($events as $event) {
                         echo '<option value =' . $event["eventid"] . '>' . 'Shift ' . $event["eventid"] . ': ' . $event["title"] .
@@ -309,7 +301,7 @@ $availability_strings = [
 
             <br>
 
-            <input type="submit" name="submit" value="Remove Shift">
+            <input type="submit" name="submit" value="Remove Shift" style= "background-color: gray; color: white; font-size: smaller">
         </form>
     <?php } ?>
     <!-- </div> -->

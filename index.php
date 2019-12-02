@@ -65,14 +65,17 @@ $events = get_events();
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item" id="ask_view">
-                    <a class="nav-link" href="./ask-question.html">Ask a Question</a>
-                </li>
                 <li class="nav-item" id="manager_view">
                     <a class="nav-link" href="./manager_scheduler.php">Manager</a>
                 </li>
+                <li class="nav-item" id="stu_feedback_view">
+                    <a class="nav-link" href="./student-feedback.php">Student Feedback</a>
+                </li>
                 <li class="nav-item" id="ta_view">
                     <a class="nav-link" href="./ta_scheduler.php">My Schedule</a>
+                </li>
+                <li class="nav-item" id="stu_view">
+                    <a class="nav-link" href="./give-feedback.php">Give Feedback</a>
                 </li>
             </ul>
             <div id="current_user" style="color: white; margin-right: 5px;">
@@ -81,7 +84,6 @@ $events = get_events();
 
                     echo "Welcome " . $_SESSION["eid"];
                     echo " Role: " . $_SESSION["role"];
-                    // echo '<div onload="showView($_SESSION["role"])"></div>';
                 }
                 ?>
             </div>
@@ -91,102 +93,91 @@ $events = get_events();
             </div>
         </div>
     </nav>
+    <!-- navbar stuff ends -->
 
-    <div style="margin-top: 300px;">
-        <div id='ta_cal'></div>
-    </div>
+    <div class="container">
+        <div class="row" style="margin-top: 100px;">
+            <div class="col-8 ">
+                <h2 class="sem_title">Semester Schedule</h2>
+                <div>
+                    <div id='ta_cal'></div>
+                </div>
+            </div>
+            <div class="col-4 queue">
+                <h2 class="sem_title">Help Queue</h2>
+                <div id="help-queue" style="margin-top: 100px;">
 
-    <div id="help-queue" style="margin-top: 100px;">
+                    <table id="queue-table" class="row justify-content-center">
+                        <!-- onload="populateQueue()"-->
 
-        <table id="queue-table" class="row justify-content-center">
+                        <?php
 
-            <?php
+                        $sql = "SELECT * FROM existing_queue ";
+                        $result = mysqli_query($link, $sql);
+                        /*if ($stmt = mysqli_prepare($link, $sql)) {
 
-            $sql = "SELECT * FROM existing_queue ";
-            $result = mysqli_query($link, $sql);
+                        if (mysqli_stmt_execute($stmt)) {
+                            /* store result 
+                            mysqli_stmt_store_result($stmt);
 
-            ?>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Class Number</th>
-            </tr>
+                        } else {
+                            echo "Oops! Something went wrong. Please try again later.";
+                        }
+                        } */
+                        ?>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Class Number</th>
+                        </tr>
 
-            <?php
-            while ($row = mysqli_fetch_array($result)) {
-                echo "<tr>";
-                echo "<td>" . $row['fname'] . "</td>";
-                echo "<td>" . $row['lname'] . "</td>";
-                echo "<td>" . $row['classnum'] . "</td>";
-                echo "</tr>";
-            }
+                        <?php
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['fname'] . "</td>";
+                            echo "<td>" . $row['lname'] . "</td>";
+                            echo "<td>" . $row['classnum'] . "</td>";
+                            echo "</tr>";
+                        }
 
-            ?>
-        </table>
-
-
+                        ?>
+                    </table>
 
 
-        <div id="nameEntry">
+                    <div id="nameEntry">
 
-            <div class="row justify-content-center" style="margin-top: 50px;">
-                <form id="nameForm">
-                    <div class="form-group">
-                        <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"] ?>">
-                        <br>
-                        <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"] ?>">
-                        <br>
-                        <select name="numClass" id="numClass" placeholder="Class number..">
-                            <option value="CS149">CS149</option>
-                            <option value="CS159">CS159</option>
-                            <option value="CS240">CS240</option>
-                            <option value="CS261">CS261</option>
-                            <option value="CS345">CS345</option>
-                        </select>
-                        <br>
-                        <button type="button" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
-                        <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
+                        <div class="row justify-content-center" style="margin-top: 50px;">
+                            <form id="nameForm" method="post" action="add_queue.php">
+                                <div class="form-group">
+                                    <input type="hidden" id="eid" name="EID" value="<?php echo $_SESSION["eid"] ?>">
+                                    <br>
+                                    <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"] ?>">
+                                    <br>
+                                    <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"] ?>">
+                                    <br>
+                                    <select name="numClass" id="numClass" placeholder="Class number..">
+                                        <option value="CS149">CS149</option>
+                                        <option value="CS159">CS159</option>
+                                        <option value="CS240">CS240</option>
+                                        <option value="CS261">CS261</option>
+                                        <option value="CS345">CS345</option>
+                                    </select>
+                                    <br>
+                                    <button disabled id="joinButton" type="submit" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
+
+                                    <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
+                                </div>
+                            </form>
+                            <form id="removeHolder" method="post" action="remove_queue.php">
+                                <button id="removeButton" type="submit" onclick="removeQueryEntry()" class="btn btn-primary btn-sm float-right mt-2">Leave Queue</button>
+                            </form>
+                        </div>
                     </div>
-                </form>
+
+                </div>
             </div>
         </div>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small>Donec id elit non mi porta.</small>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small class="text-muted">Donec id elit non mi porta.</small>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small class="text-muted">Donec id elit non mi porta.</small>
-            </a>
-        </div>
-
     </div>
-
-    <!-- Fancy add to list with animation -->
-    <!-- <button class="btn btn-outline-primary" id="add-to-list">Add a list item</button>
-
-    <ul id="list" class="swing">
-        <li class="show">List item</li>
-        <li class="show">List item</li>
-    </ul> 
-            -->
 
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->

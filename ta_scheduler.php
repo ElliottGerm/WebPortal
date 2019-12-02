@@ -44,18 +44,6 @@ $days = [
     <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- cdn for modernizr, if you haven't included it already -->
-    <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
-    <!-- polyfiller file to detect and load polyfills -->
-    <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
-    <script>
-        webshims.setOptions('waitReady', false);
-        webshims.setOptions('forms-ext', {
-            types: 'date'
-        });
-        webshims.polyfill('forms forms-ext');
-    </script>
-
     <style>
         body {
             margin: 40px 10px;
@@ -68,10 +56,17 @@ $days = [
             max-width: 900px;
             margin: 0 auto;
         }
+
+        input[type=submit] {
+            background-color: gray;
+            color: white;
+            border-radius: 5px;
+            border-color: gray;
+        }
     </style>
 </head>
 
-<body >
+<body>
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">TAPortal</a>
@@ -188,35 +183,41 @@ $days = [
     </div>
 
     <!-- </div> -->
+
+
     <form method="post">
-        <div class="form-group">
-            <label for="start_date">Start: </label>
-            <input type="date" name="start_date" id="start_date">
-            <select name="start_time" id="start_time">
-                <?php
-                for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
-                    for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
-                        echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
-                ?>
-            </select>
-            <br>
-            <label for="end_date">End: </label>
-            <input type="date" name="end_date" id="end_date">
-            <select name="end_time" id="end_time">
-                <?php
-                for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
-                    for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
-                        echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
-                ?>
-            </select>
-            <input type="submit" name="submit" value="submit">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <label for="start_date">Start: </label>
+                    <input type="date" name="start_date" id="start_date">
+                    <select name="start_time" id="start_time" style="background-color: gray; color: white; font-size: smaller">
+                        <?php
+                        for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
+                            for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
+                                echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
+                                    . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
+                                    . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
+                        ?>
+                    </select>
+                </div>
+                <div class="col-md-auto">
+                    <label for="end_date">End: </label>
+                    <input type="date" name="end_date" id="end_date">
+                    <select name="end_time" id="end_time" style="background-color: gray; color: white; font-size: smaller">
+                        <?php
+                        for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
+                            for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
+                                echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
+                                    . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
+                                    . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
+                        ?>
+                    </select>
+                    <input type="submit" name="submit" value="submit" style="background-color: gray; color: white; font-size: smaller">
+                </div>
+            </div>
         </div>
     </form>
-
     <!-- </div> -->
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
