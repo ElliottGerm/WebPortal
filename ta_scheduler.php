@@ -2,10 +2,10 @@
 <html lang="en">
 
 <?php
-include("get_users.php");
-include("get_events.php");
+// include("get_users.php");
+// include("get_events.php");
 
-$events = get_events();
+// $events = get_events();
 ?>
 
 <head>
@@ -491,7 +491,7 @@ $events = get_events();
                             . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
                 ?>
             </select>
-            <input type="submit" name="submit" value="submit">
+            <input type="submit" name="submit" value="submit" style= "background-color: gray; color: white; font-size: smaller">
     </div>
   </div>
 </div>

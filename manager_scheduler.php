@@ -2,11 +2,11 @@
 <html lang="en">
 
 <?php
-include("get_users.php");
-include("get_events.php");
+// include("get_users.php");
+// include("get_events.php");
 
-$events = get_events();
-$users = get_users();
+// $events = get_events();
+// $users = get_users();
 ?>
 
 <head>
@@ -16,7 +16,7 @@ $users = get_users();
     <title>TAPortal-TA Scheduler</title>
     <link href="./styles/index.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="your_website_domain/css_root/flaticon.css">
-
+    <link href="./styles/manager_scheduler.css" type="text/css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href='packages/core/main.css' rel='stylesheet' />
@@ -46,13 +46,6 @@ $users = get_users();
     </script>
 
     <style>
-        body {
-            margin: 40px 10px;
-            padding: 0;
-            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-            font-size: 14px;
-        }
-
         #ta_cal {
             max-width: 900px;
             margin: 0 auto;
@@ -95,7 +88,7 @@ $users = get_users();
     <form method="post" action="add_event.php" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="title">User: </label>
-            <select name="title" id="title">
+            <select name="title" id="title"  style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 foreach ($users as $user) {
                     echo '<option>' . $user . '</option>';
@@ -105,7 +98,7 @@ $users = get_users();
             <br>
             <label for="start_date">Start: </label>
             <input type="date" name="start_date" id="start_date">
-            <select name="start_time" id="start_time">
+            <select name="start_time" id="start_time" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -117,7 +110,7 @@ $users = get_users();
             <br>
             <label for="end_date">End: </label>
             <input type="date" name="end_date" id="end_date">
-            <select name="end_time" id="end_time">
+            <select name="end_time" id="end_time" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -128,7 +121,7 @@ $users = get_users();
             </select>
             <br>
             <label for="color">Color: </label>
-            <select name="color" id="color">
+            <select name="color" id="color" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                 const colors = array(
                     'Blue', 'Magenta', 'Light Green', 'Pink', 'Light Orange', 'Light Purple',
@@ -150,7 +143,7 @@ $users = get_users();
     <?php if (!empty($events)) { ?>
         <form method="post" action="remove_event.php">
             <label for="remove_event">Remove Shift: </label>
-            <select name="remove_event" id="remove_event">
+            <select name="remove_event" id="remove_event" style= "background-color: gray; color: white; font-size: smaller">
                 <?php
                     foreach ($events as $event) {
                         echo '<option value =' . $event["eventid"] . '>' . 'Shift ' . $event["eventid"] . ': ' . $event["title"] .
@@ -161,7 +154,7 @@ $users = get_users();
 
             <br>
 
-            <input type="submit" name="submit" value="Remove Shift">
+            <input type="submit" name="submit" value="Remove Shift" style= "background-color: gray; color: white; font-size: smaller">
         </form>
     <?php } ?>
     <!-- </div> -->
