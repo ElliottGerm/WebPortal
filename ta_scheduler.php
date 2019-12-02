@@ -2,10 +2,10 @@
 <html lang="en">
 
 <?php
-include("get_users.php");
-include("get_events.php");
+// include("get_users.php");
+// include("get_events.php");
 
-$events = get_events();
+// $events = get_events();
 ?>
 
 <head>
@@ -42,6 +42,13 @@ $events = get_events();
         #ta_cal {
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        input[type=submit]{
+            background-color: gray;
+            color:  white;
+            border-radius: 5px;
+            border-color: gray;
         }
     </style>
 </head>
@@ -454,11 +461,15 @@ $events = get_events();
     </div>
 
     <!-- </div> -->
-    <form method="post">
-        <div class="form-group">
-            <label for="start_date">Start: </label>
+
+
+        <form method="post">
+        <div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+    <label for="start_date">Start: </label>
             <input type="date" name="start_date" id="start_date">
-            <select name="start_time" id="start_time">
+            <select name="start_time" id="start_time" style = "background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -467,10 +478,11 @@ $events = get_events();
                             . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
                 ?>
             </select>
-            <br>
-            <label for="end_date">End: </label>
+    </div>
+    <div class="col-md-auto">
+    <label for="end_date">End: </label>
             <input type="date" name="end_date" id="end_date">
-            <select name="end_time" id="end_time">
+            <select name="end_time" id="end_time" style = "background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -479,9 +491,11 @@ $events = get_events();
                             . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
                 ?>
             </select>
-            <input type="submit" name="submit" value="submit">
-        </div>
-    </form>
+            <input type="submit" name="submit" value="submit" style= "background-color: gray; color: white; font-size: smaller">
+    </div>
+  </div>
+</div>
+</form>     
     <!-- </div> -->
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->

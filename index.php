@@ -101,26 +101,52 @@ require_once("config.php");
             </div>
             <div class="col-4 queue">
                 <h2 class="sem_title">Help Queue</h2>
-                <div id="help-queue">
+                <div id="help-queue" style="margin-top: 100px;">
 
                     <table id="queue-table" class="row justify-content-center">
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Class Number</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <!-- onload="populateQueue()"-->
 
-                        </tbody>
+                        <?php
+
+                        $sql = "SELECT * FROM existing_queue ";
+                        $result = mysqli_query($link, $sql);
+                        /*if ($stmt = mysqli_prepare($link, $sql)) {
+
+                        if (mysqli_stmt_execute($stmt)) {
+                            /* store result 
+                            mysqli_stmt_store_result($stmt);
+
+                        } else {
+                            echo "Oops! Something went wrong. Please try again later.";
+                        }
+                        } */
+                        ?>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Class Number</th>
+                        </tr>
+
+                        <?php
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['fname'] . "</td>";
+                            echo "<td>" . $row['lname'] . "</td>";
+                            echo "<td>" . $row['classnum'] . "</td>";
+                            echo "</tr>";
+                        }
+
+                        ?>
                     </table>
+
 
                     <div id="nameEntry">
 
                         <div class="row justify-content-center" style="margin-top: 50px;">
-                            <form id="nameForm">
+                            <form id="nameForm" method="post" action="add_queue.php">
                                 <div class="form-group">
+                                    <input type="hidden" id="eid" name="EID" value="<?php echo $_SESSION["eid"] ?>">
+                                    <br>
                                     <input type="hidden" id="first" name="firstName" value="<?php echo $_SESSION["fname"] ?>">
                                     <br>
                                     <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"] ?>">
@@ -133,17 +159,21 @@ require_once("config.php");
                                         <option value="CS345">CS345</option>
                                     </select>
                                     <br>
-                                    <button type="button" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
+                                    <button disabled id="joinButton" type="submit" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
+
                                     <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
                                 </div>
                             </form>
+                            <form id="removeHolder" method="post" action="remove_queue.php">
+                                <button id="removeButton" type="submit" onclick="removeQueryEntry()" class="btn btn-primary btn-sm float-right mt-2">Leave Queue</button>
+                            </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-
 
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->

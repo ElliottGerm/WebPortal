@@ -12,16 +12,14 @@
 .dayHeadings{
     text-align: center;
     margin-bottom: 0%;
-    background-color: rgba(191, 199, 204, 0.817);
-    border: rgb(131, 131, 131) solid 1px;
-
+    border-style: solid;
+    border-color: gray;
 }
 
 .drop-down{
-    /* margin-bottom: 5px; */
-    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color: gray;
+    color: white;
+    font-size: smaller;
 }
-
-/* .headingBox{
-    background-color: rgba(77, 184, 250, 0.817);
-} */
