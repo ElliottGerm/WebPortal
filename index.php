@@ -5,7 +5,7 @@ $_SESSION["role"] = "";
 $_SESSION["fname"] = "";
 $_SESSION["lname"] = "";
 session_start();
-// require_once("config.php");
+require_once("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,14 +61,17 @@ session_start();
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item" id="ask_view">
-                    <a class="nav-link" href="./ask-question.html">Ask a Question</a>
-                </li>
                 <li class="nav-item" id="manager_view">
                     <a class="nav-link" href="./manager_scheduler.php">Manager</a>
                 </li>
+                <li class="nav-item" id="stu_feedback_view">
+                    <a class="nav-link" href="./student-feedback.php">Student Feedback</a>
+                </li>
                 <li class="nav-item" id="ta_view">
                     <a class="nav-link" href="./ta_scheduler.php">My Schedule</a>
+                </li>
+                <li class="nav-item" id="stu_view">
+                    <a class="nav-link" href="./give-feedback.php">Give Feedback</a>
                 </li>
             </ul>
             <div id="current_user" style="color: white; margin-right: 5px;">

@@ -213,10 +213,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button type="submit" class="btn btn-primary btn-block" value="submit"> Create Account </button>
                         </div>
                     </form>
-
             </article>
         </div>
-    </div>
     </div>
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->

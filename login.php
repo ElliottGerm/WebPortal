@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ul>
             <div>
                 <a class="btn btn-outline-primary" href="#" role="button">Sign In | Register</a>
-                <a class="btn btn-outline-secondary disabled" id="signOutButton" role="button">Logout</a>
+                <a class="btn btn-outline-secondary disabled" id="signOutButton" role="button" style="color: gray">Logout</a>
             </div>
         </div>
     </nav>

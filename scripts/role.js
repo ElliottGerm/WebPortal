@@ -4,13 +4,15 @@ function showView(role, eid) {
     if(role == 1){
         var man_view = document.getElementById("manager_view");
         man_view.style.display = "inline";
+        var man_view = document.getElementById("stu_feedback_view");
+        man_view.style.display = "inline";
     } 
     if(role == 2){
         var ta_view = document.getElementById("ta_view");
         ta_view.style.display = "inline";
     } 
     if(role == 3){
-        var ask_view = document.getElementById("ask_view");
+        var ask_view = document.getElementById("stu_view");
         ask_view.style.display = "inline";
     } 
     if(eid){
@@ -18,3 +20,4 @@ function showView(role, eid) {
         logoutButton.classList.remove("disabled");
     }
 }
+

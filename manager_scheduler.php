@@ -63,6 +63,9 @@ $users = get_users();
                 <li class="nav-item active" id="manager_view">
                     <a class="nav-link" href="./manager_scheduler.php">Manager <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item" id="stu_feedback_view">
+                    <a class="nav-link" href="./student-feedback.php">Student Feedback</a>
+                </li>
             </ul>
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>

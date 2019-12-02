@@ -6,7 +6,7 @@
   margin-right: 5px;
 }
 
-#ta_view, #manager_view, #ask_view{ 
+#stu_view, #ta_view, #manager_view, #stu_feedback_view{ 
   display: none;
 }
 
@@ -27,8 +27,6 @@
   text-align: center;
   padding: 0.25em;
 }
-
-
 
 
 /* FANCY LIST ANIMATION STUFF*/
