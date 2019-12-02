@@ -183,8 +183,12 @@
                         </select>
                         <br>
                         <button id = "joinButton" type="submit" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2 disabled">Join Queue</button>
+                        
                         <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
                     </div>
+                </form>
+                <form id="removeHolder" method="post" action="remove_queue.php">
+                    <button id = "removeButton" type="submit" onclick="removeQueryEntry()" class="btn btn-primary btn-sm float-right mt-2">Leave Queue</button>
                 </form>
             </div>
         </div>
