@@ -1,13 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
-include("get_users.php");
-include("get_events.php");
+$_SESSION["eid"] = "";
+session_start();
+
+include("./php/get_users.php");
+include("./php/get_events.php");
+include("./php/get_requests.php");
+include("./php/get_stu_availability.php");
 
 $events = get_events();
 $users = get_users();
+$requests = get_requests();
+$stu_availabilities = get_stu_availability();
+
+$request_strings = [
+    'Mondays' => 'mo_times',
+    'Tuesdays' => 'tu_times',
+    'Wednesdays' => 'we_times',
+    'Thursdays' => 'th_times',
+    'Fridays' => 'fr_times',
+    'Saturdays' => 'sa_times',
+    'Sundays' => 'su_times'
+];
+
+$availability_strings = [
+    'mo_times',
+    'tu_times',
+    'we_times',
+    'th_times',
+    'fr_times',
+    'sa_times',
+    'su_times'
+];
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -32,6 +59,7 @@ $users = get_users();
     <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="./scripts/validate_form.js"></script>
+    <script type="text/javascript" src="./scripts/menu_selector.js"></script>
 
     <!-- cdn for modernizr, if you haven't included it already -->
     <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
@@ -56,6 +84,29 @@ $users = get_users();
         #ta_cal {
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        .vertical-menu {
+            width: 350px;
+            height: 150px;
+            overflow-y: auto;
+        }
+
+        .vertical-menu option {
+            background-color: #eee;
+            color: black;
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+        }
+
+        .vertical-menu option:hover {
+            background-color: #ccc;
+        }
+
+        .vertical-menu option.active {
+            background-color: #4CAF50;
+            color: white;
         }
     </style>
 </head>
@@ -89,6 +140,103 @@ $users = get_users();
     <div style="margin-top: 150px;">
         <div id='ta_cal'></div>
     </div>
+
+    <?php
+    foreach ($requests as $request) {
+        echo $request['id'];
+    }
+    ?>
+
+    <form method="post">
+        <div id="selection-menu" class="vertical-menu">
+            <!-- <a href="#" class="active">Home</a> -->
+            <?php
+
+            foreach ($requests as $request) {
+                $valid_times = array();
+                $request_msg = $request['eid'] . " has requested to work:\n";
+                $request_times = array();
+                $message = "";
+
+                foreach ($request_strings as $request_string) {
+                    if ($request[$request_string] != "NULL") {
+                        $request_times[] = $request_string;
+                    }
+                }
+
+                foreach ($request_times as $request_time) {
+                    $valid_times[] = "* from " . $request[$request_time] . " on " . array_search($request_time, $request_strings) . "\n";
+                }
+
+                foreach ($valid_times as $valid_time) {
+                    $request_msg = $request_msg . $valid_time;
+                }
+
+                // $compact_mo = 'Mo:'. $request['mo_times'] .';';
+                // $compact_tu = 'Tu:'. $request['tu_times'] .';';
+                // $compact_we = 'We:'. $request['we_times'] .';';
+                // $compact_th = 'Th:'. $request['th_times'] .';';
+                // $compact_fr = 'Fr:'. $request['fr_times'] .';';
+                // $compact_sa = 'Sa:'. $request['sa_times'] .';';
+                // $compact_su = 'Su:'. $request['su_times'] .';';
+                // $compact_msg = $request['eid'] . ': '. $compact_mo . $compact_tu . $compact_we . $compact_th . $compact_fr . $compact_sa .$compact_su;
+
+                echo '<option title="' . $request_msg . '" id=' . $request['id'] . ' class="inactive" onclick="select(' . $request['id'] . ');">' . $request['eid'] . ' Schedule Request (Hover to view)</option>';
+                echo '<input id="input_' . $request['id'] . '" name="input_' . $request['id'] . '" class="inactive" value=' . $request['eid'] . ',' . $request['id'] . ' hidden disabled>';
+            }
+            ?>
+            <!-- <option id=0 class="inactive" onclick="select(0);">Entourage</option>
+            <input id="input_0" name="input_0" class="inactive" value="request id 0" hidden>
+            <option id=1 class="inactive" onclick="select(1);">Chevy</option>
+            <input id="input_1" name="input_1" class="inactive" value="request id 1" hidden> -->
+        </div>
+
+        <h4>Comments:</h4>
+        <textarea name="request_comment" rows="4" cols="50">None</textarea>
+
+        <br>
+
+        <input type="submit" name="accept" value="Accept">
+        <input type="submit" name="reject" value="Reject">
+
+        <script type="text/javascript">
+            var val = "";
+            val = "<?php include "accept-reject_request.php"; ?>"
+            if (val) {
+                val = val.replace(/\t/g, '\n');
+                alert(val);
+            }
+        </script>
+    </form>
+
+    <br>
+    <h4>Student Availability:</h4>
+    <table style="width:100%" border="1">
+        <tr>
+            <th>User</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+        <?php
+        foreach ($stu_availabilities as $availability) {
+            echo "<tr>";
+            echo "<td>". $availability["eid"] ."</td>";
+            foreach ($availability_strings as $availability_string) {
+                if($availability[$availability_string] != "NULL") {
+                    echo "<td>". $availability[$availability_string] ."</td>";
+                } else {
+                    echo "<td>None</td>";
+                }
+            }
+            echo "</tr>";
+        }
+        ?>
+    </table>
 
     <!-- <?php if (!empty($users)) { } ?> -->
     <!-- </div> -->
@@ -212,6 +360,7 @@ $users = get_users();
 
         load_calendar('ta_cal', events);
     </script>
+
 
 </body>
 

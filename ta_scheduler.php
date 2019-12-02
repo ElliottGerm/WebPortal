@@ -2,8 +2,8 @@
 <html lang="en">
 
 <?php
-include("get_users.php");
-include("get_events.php");
+include("./php/get_users.php");
+include("./php/get_events.php");
 
 $events = get_events();
 $days = [
@@ -71,7 +71,7 @@ $days = [
     </style>
 </head>
 
-<body>
+<body >
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">TAPortal</a>
@@ -87,6 +87,16 @@ $days = [
                     <a class="nav-link" href="./ta_scheduler.php">My Schedule<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
+            <div id="current_user" style="color: white; margin-right: 5px;">
+                <?php
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+
+                    echo "Welcome " . $_SESSION["eid"];
+                    echo " Role: " . $_SESSION["role"];
+                    // echo '<div onload="showView($_SESSION["role"])"></div>';
+                }
+                ?>
+            </div>
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
                 <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
@@ -130,7 +140,7 @@ $days = [
                                     </select>
                                 </span>
                                 <span>
-                                    <select class="drop-down" name=<?php echo 'start_meridiem'; ?>>
+                                    <select class="drop-down" name=<?php echo 'start_meridiem_' . strtolower($day); ?>>
                                         <option selected value="AM">AM</option>
                                         <option value="PM">PM</option>
                                     </select>
@@ -155,7 +165,7 @@ $days = [
                                     </select>
                                 </span>
                                 <span>
-                                    <select class="drop-down" name=<?php echo 'end_meridiem'; ?>>
+                                    <select class="drop-down" name=<?php echo 'end_meridiem_' . strtolower($day); ?>>
                                         <option selected value="AM">AM</option>
                                         <option value="PM">PM</option>
                                     </select>

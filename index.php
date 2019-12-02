@@ -7,7 +7,7 @@ $_SESSION["lname"] = "";
 session_start();
 require_once "config.php";
 
-include("get_events.php");
+include("./php/get_events.php");
 
 $events = get_events();
 ?>

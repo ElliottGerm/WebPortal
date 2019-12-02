@@ -16,5 +16,7 @@ function showView(role, eid) {
     if(eid){
         var logoutButton = document.getElementById("signOutButton");
         logoutButton.classList.remove("disabled");
+        // var queueButton = document.getElementById("joinButton");
+        // queueButton.classList.remove("disabled");
     }
 }
