@@ -26,8 +26,8 @@ function load_calendar(cal_id, events) {
                 // })
                 // {
                 //     title: 'Business Lunch',
-                //     start: '2019-11-03T13:00:00',
-                //     end: '2019-11-07T13:00:00',
+                //     start: '2019-12-03T13:00:00',
+                //     end: '2019-12-07T13:00:00',
                 //     constraint: 'businessHours'
                 // },
                 // {

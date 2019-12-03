@@ -92,17 +92,45 @@ if ($start_sunday != "N/A" && $end_sunday != "N/A") {
 // echo $sa_times;
 // echo $su_times;
 
-// echo date_default_timezone_get();
+$id = 0;
 
-$newRequest = "insert into webportal_db.scheduler_requests (eid, mo_times, tu_times, we_times, 
-th_times, fr_times, sa_times, su_times, request_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "SELECT EXISTS (SELECT 1 FROM webportal_db.scheduler_requests)";
+
+if ($link->connect_errno) {
+    printf("Connect failed: %s\n", $conn->connect_error);
+    exit();
+}
+
+if ($result = $link->query($sql)) {
+    while ($row = $result->fetch_assoc()) {
+        $isEmpty = array_pop(array_reverse($row));
+    }
+    /* free result set */
+    $result->close();
+}
+
+if ($isEmpty != 0) {
+    $sql = "SELECT MAX(id) FROM webportal_db.scheduler_requests;";
+
+    if ($result = $link->query($sql)) {
+        // printf("Select returned %d rows.\n", $result->num_rows);
+        while ($row = $result->fetch_assoc()) {
+            $id = array_pop(array_reverse($row)) + 1;
+        }
+        /* free result set */
+        $result->close();
+    }
+}
+
+$newRequest = "insert into webportal_db.scheduler_requests (id, eid, mo_times, tu_times, we_times, 
+th_times, fr_times, sa_times, su_times, request_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 if ($link->connect_errno) {
     printf("Connect failed: %s\n", $link->connect_error);
     exit();
 }
 
 $stmt = $link->prepare($newRequest);
-$stmt->bind_param("sssssssss", $eid, $mo_times, $tu_times, $we_times, $th_times, $fr_times, $sa_times, $su_times, $date);
+$stmt->bind_param("isssssssss", $id, $eid, $mo_times, $tu_times, $we_times, $th_times, $fr_times, $sa_times, $su_times, $date);
 $stmt->execute();
 
 $newId = $link->insert_id;

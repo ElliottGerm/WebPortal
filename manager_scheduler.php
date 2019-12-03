@@ -123,6 +123,13 @@ $availability_strings = [
                     <a class="nav-link" href="./student-feedback.php">Student Feedback</a>
                 </li>
             </ul>
+            <div id="current_user" style="color: white; margin-right: 8px;">
+                <?php
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+                    echo "Welcome " . $_SESSION["eid"];
+                }
+                ?>
+            </div>
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
                 <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>
@@ -137,11 +144,10 @@ $availability_strings = [
         <div id='ta_cal'></div>
     </div>
 
-    <h4>Student Requests</h4>
+    <!-- <h4>Student Requests</h4>
 
     <form method="post">
         <div id="selection-menu" class="vertical-menu">
-            <!-- <a href="#" class="active">Home</a> -->
             <?php
 
             foreach ($requests as $request) {
@@ -177,10 +183,7 @@ $availability_strings = [
                 echo '<input id="input_' . $request['id'] . '" name="input_' . $request['id'] . '" class="inactive" value=' . $request['eid'] . ',' . $request['id'] . ' hidden disabled>';
             }
             ?>
-            <!-- <option id=0 class="inactive" onclick="select(0);">Entourage</option>
-            <input id="input_0" name="input_0" class="inactive" value="request id 0" hidden>
-            <option id=1 class="inactive" onclick="select(1);">Chevy</option>
-            <input id="input_1" name="input_1" class="inactive" value="request id 1" hidden> -->
+
         </div>
 
         <h4>Comments:</h4>
@@ -199,7 +202,7 @@ $availability_strings = [
                 alert(val);
             }
         </script>
-    </form>
+    </form> -->
 
     <br>
     <h4>Student Availabilities:</h4>

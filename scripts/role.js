@@ -14,12 +14,15 @@ function showView(role, eid) {
     if(role == 3){
         var ask_view = document.getElementById("stu_view");
         ask_view.style.display = "inline";
+        var queueButton = document.getElementById("joinButton");
+        queueButton.removeAttribute("disabled");
+        var deleteButton = document.getElementById("removeButton");
+        deleteButton.removeAttribute("disabled");
     } 
     if(eid){
         var logoutButton = document.getElementById("signOutButton");
         logoutButton.classList.remove("disabled");
-        var queueButton = document.getElementById("joinButton");
-        queueButton.removeAttribute("disabled");
+        
     }
 }
 

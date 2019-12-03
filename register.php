@@ -3,8 +3,8 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = $fname = $lname = "";
-$username_err = $password_err = $confirm_password_err = $fname_err = $lname_err = "";
+$username = $password = $confirm_password = $fname = $lname = $email = "";
+$username_err = $password_err = $confirm_password_err = $fname_err = $lname_err = $email_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -56,6 +56,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lname = trim($_POST["lname"]);
     }
 
+    // Validate email
+    if (empty(trim($_POST["email"]))) {
+        $email_err = "Please enter your email.";
+    } else {
+        $email = trim($_POST["email"]);
+    }
+
     // Validate password
     if (empty(trim($_POST["password"]))) {
         $password_err = "Please enter a password.";
@@ -76,14 +83,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check input errors before inserting in database
-    if (empty($username_err) && empty($fname_err) && empty($lname_err) && empty($password_err) && empty($confirm_password_err)) {
+    if (empty($username_err) && empty($fname_err) && empty($lname_err) && empty($email_err) &&empty($password_err) && empty($confirm_password_err)) {
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (eid, fname, lname, password, role) VALUES (?, ?, ?, ?, 3)";
+        $sql = "INSERT INTO users (eid, fname, lname, password, role, email) VALUES (?, ?, ?, ?, 3, ?)";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssss", $param_username, $fname, $lname, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $fname, $lname, $param_password, $email);
 
             // Set parameters
             $param_username = $username;
@@ -184,6 +191,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <input type="text" name="lname" class="form-control" placeholder="Last Name">
                             <span class="help-block"><?php echo $lname_err; ?></span>
+                        </div>
+                        <!-- EMAIL -->
+                        <div class="form-group input-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-email"></i> </span>
+                            </div>
+                            <input type="text" name="email" class="form-control" placeholder="Email">
+                            <span class="help-block"><?php echo $email_err; ?></span>
                         </div>
                         <!-- PASSWORD -->
                         <div class="form-group input-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">

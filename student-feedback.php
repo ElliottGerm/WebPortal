@@ -151,6 +151,13 @@ if (isset($_POST['submit'])) {
                     <a class="nav-link" href="#">Student Feedback<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
+            <div id="current_user" style="color: white; margin-right: 8px;">
+                <?php
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+                    echo "Welcome " . $_SESSION["eid"];
+                }
+                ?>
+            </div>
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In |
                     Register</a>
