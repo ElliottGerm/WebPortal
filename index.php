@@ -169,7 +169,7 @@ $events = get_events();
                                 </div>
                             </form>
                             <form id="removeHolder" method="post" action="remove_queue.php">
-                                <button id="removeButton" type="submit" onclick="removeQueryEntry()" class="btn btn-primary btn-sm float-right mt-2">Leave Queue</button>
+                                <button disabled="disabled" id="removeButton" type="submit" onclick="removeQueryEntry()" class="btn btn-primary btn-sm float-right mt-2 hidden">Leave Queue</button>
                             </form>
                         </div>
                     </div>
