@@ -123,6 +123,13 @@ $availability_strings = [
                     <a class="nav-link" href="./student-feedback.php">Student Feedback</a>
                 </li>
             </ul>
+            <div id="current_user" style="color: white; margin-right: 8px;">
+                <?php
+                if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+                    echo "Welcome " . $_SESSION["eid"];
+                }
+                ?>
+            </div>
             <div>
                 <a class="btn btn-outline-primary" id="signInButton" href="./login.php" role="button">Sign In | Register</a>
                 <a class="btn btn-outline-secondary" id="signOutButton" href="./logout.php" role="button">Logout</a>

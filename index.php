@@ -78,12 +78,10 @@ $events = get_events();
                     <a class="nav-link" href="./give-feedback.php">Give Feedback</a>
                 </li>
             </ul>
-            <div id="current_user" style="color: white; margin-right: 5px;">
+            <div id="current_user" style="color: white; margin-right: 8px;">
                 <?php
                 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-
                     echo "Welcome " . $_SESSION["eid"];
-                    echo " Role: " . $_SESSION["role"];
                 }
                 ?>
             </div>
@@ -105,7 +103,7 @@ $events = get_events();
             </div>
             <div class="col-4 queue">
                 <h2 class="sem_title">Help Queue</h2>
-                <div id="help-queue" style="margin-top: 100px;">
+                <div id="help-queue">
 
                     <table id="queue-table" class="row justify-content-center">
                         <!-- onload="populateQueue()"-->

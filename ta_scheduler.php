@@ -2,6 +2,8 @@
 <html lang="en">
 
 <?php
+session_start();
+require_once("config.php");
 include("./php/get_users.php");
 include("./php/get_events.php");
 
@@ -82,13 +84,10 @@ $days = [
                     <a class="nav-link" href="./ta_scheduler.php">My Schedule<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <div id="current_user" style="color: white; margin-right: 5px;">
+            <div id="current_user" style="color: white; margin-right: 8px;">
                 <?php
                 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-
                     echo "Welcome " . $_SESSION["eid"];
-                    echo " Role: " . $_SESSION["role"];
-                    // echo '<div onload="showView($_SESSION["role"])"></div>';
                 }
                 ?>
             </div>
@@ -185,7 +184,7 @@ $days = [
     <!-- </div> -->
 
 
-    <form method="post">
+    <!-- <form method="post">
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-auto">
@@ -217,7 +216,7 @@ $days = [
                 </div>
             </div>
         </div>
-    </form>
+    </form> -->
     <!-- </div> -->
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
