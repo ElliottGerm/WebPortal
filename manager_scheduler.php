@@ -144,11 +144,10 @@ $availability_strings = [
         <div id='ta_cal'></div>
     </div>
 
-    <h4>Student Requests</h4>
+    <!-- <h4>Student Requests</h4>
 
     <form method="post">
         <div id="selection-menu" class="vertical-menu">
-            <!-- <a href="#" class="active">Home</a> -->
             <?php
 
             foreach ($requests as $request) {
@@ -184,10 +183,7 @@ $availability_strings = [
                 echo '<input id="input_' . $request['id'] . '" name="input_' . $request['id'] . '" class="inactive" value=' . $request['eid'] . ',' . $request['id'] . ' hidden disabled>';
             }
             ?>
-            <!-- <option id=0 class="inactive" onclick="select(0);">Entourage</option>
-            <input id="input_0" name="input_0" class="inactive" value="request id 0" hidden>
-            <option id=1 class="inactive" onclick="select(1);">Chevy</option>
-            <input id="input_1" name="input_1" class="inactive" value="request id 1" hidden> -->
+
         </div>
 
         <h4>Comments:</h4>
@@ -206,7 +202,7 @@ $availability_strings = [
                 alert(val);
             }
         </script>
-    </form>
+    </form> -->
 
     <br>
     <h4>Student Availability:</h4>
