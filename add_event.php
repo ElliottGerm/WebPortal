@@ -5,26 +5,30 @@ require_once "config.php";
 $isEmpty;
 $eventId = 0;
 $title = filter_input(INPUT_POST, 'title');
-$start_date = filter_input(INPUT_POST, 'start_date');
+$date = filter_input(INPUT_POST, 'date');
 $start_time = filter_input(INPUT_POST, 'start_time');
-$end_date = filter_input(INPUT_POST, 'end_date');
+// $end_date = filter_input(INPUT_POST, 'end_date');
 $end_time = filter_input(INPUT_POST, 'end_time');
 $color = filter_input(INPUT_POST, 'color');
+$course = filter_input(INPUT_POST, 'course');
 
 echo $title;
-echo $start_date;
+echo $date;
 echo $start_time;
-echo $end_date;
 echo $end_time;
 echo $color;
 
-$start = $start_date . 'T' . $start_time;
+$start = $date . 'T' . $start_time;
 
 echo $start;
 
-$end = $end_date . 'T' . $end_time;
+$end = $date . 'T' . $end_time;
 
 echo $end;
+
+$title = $title. " " . $course;
+
+echo $title;
 
 const colors = [
     'Blue' => '',
