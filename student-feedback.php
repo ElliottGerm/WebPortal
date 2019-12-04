@@ -13,17 +13,17 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 function questionsToday()
 {
     global $link;
-    date_default_timezone_set('America/New_York');
+    // date_default_timezone_set('America/New_York');
     // $today = date(DATE_RSS);
     // $questionsTodayQuery = "select * from comments where asked > curdate()";
+
     $questionsTodayQuery = "select * from comments";
-    // if ($connection->connect_errno) {
-    //     printf("Connect failed: %s\n", $connection->connect_error);
-    //     exit();
-    // }
+    if ($link->connect_errno) {
+        printf("Connect failed: %s\n", $link->connect_error);
+        exit();
+    }
     $items = [];
     if ($result = $link->query($questionsTodayQuery)) {
-        // printf("Select returned %d rows.\n", $result->num_rows);
         while ($question = $result->fetch_assoc()) {
             $items[] = $question;
         }
@@ -33,7 +33,6 @@ function questionsToday()
 
 
         foreach ($items as $item) {
-            // echo $item['time']." - ".$item['username']." - ".$item['message'];
             printf('<div class="scroll-bar-wrap"> 
                                 <div class="row">
                                     <div class="scroll-box">
@@ -70,7 +69,6 @@ function newQuestion($question, $author)
 
     if ($result = $link->query($sql)) {
         while ($row = $result->fetch_assoc()) {
-            // echo array_pop(array_reverse($row));
             $tmp = array_reverse($row);
             $isEmpty = array_pop($tmp);
         }
@@ -82,7 +80,6 @@ function newQuestion($question, $author)
         $sql = "SELECT MAX(postId) FROM webportal_db.comments;";
 
         if ($result = $link->query($sql)) {
-            // printf("Select returned %d rows.\n", $result->num_rows);
             while ($row = $result->fetch_assoc()) {
                 $tmp = array_reverse($row);
                 $postId = array_pop($tmp) + 1;
@@ -96,7 +93,6 @@ function newQuestion($question, $author)
     date_default_timezone_set('America/New_York');
     $postDate = date("m/d/y g:i a");
     $newQuestionQuery = "INSERT into comments (eid, commentBody, postDate, postId) values (?, ?, ?, ?)";
-    // printf("%s %s <br>", $question, $author);
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
         exit();
@@ -170,15 +166,6 @@ if (isset($_POST['submit'])) {
     <div class="container mt-5 pt-5">
         <h1 style="text-align:center">Student Feedback</h1>
         <div class="row justify-content-center mt-4 commentWraper">
-            <!-- <div class="row justify-content-center" style="margin-top: 50px;">
-                <form action="student-feedback.php" method="post" id="commentForm">
-                    <div class="form-group">
-                        <label for="commentBody">Share your experience here</label>
-                        <textarea name="commentBody" id="commentBody" class="form-control" required minlength="5" maxlength="1000"></textarea>
-                        <input type="submit" name="submit" value="post" class="btn btn-primary btn-sm float-right mt-2">
-                    </div>
-                </form>
-            </div> -->
             <div class="row justify-content-center" id="newPost">
                 <?php
                 questionsToday();

@@ -220,10 +220,10 @@ $availability_strings = [
         <?php
         foreach ($stu_availabilities as $availability) {
             echo "<tr>";
-            echo "<td>". $availability["eid"] ."</td>";
+            echo "<td>" . $availability["eid"] . "</td>";
             foreach ($availability_strings as $availability_string) {
-                if($availability[$availability_string] != "NULL") {
-                    echo "<td>". $availability[$availability_string] ."</td>";
+                if ($availability[$availability_string] != "NULL") {
+                    echo "<td>" . $availability[$availability_string] . "</td>";
                 } else {
                     echo "<td>None</td>";
                 }
@@ -238,7 +238,7 @@ $availability_strings = [
     <form method="post" action="add_event.php" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="title">User: </label>
-            <select name="title" id="title"  style= "background-color: gray; color: white; font-size: smaller">
+            <select name="title" id="title" style="background-color: gray; color: white; font-size: smaller">
                 <?php
                 foreach ($users as $user) {
                     echo '<option>' . $user . '</option>';
@@ -248,7 +248,7 @@ $availability_strings = [
             <br>
             <label for="start_date">Start: </label>
             <input type="date" name="start_date" id="start_date">
-            <select name="start_time" id="start_time" style= "background-color: gray; color: white; font-size: smaller">
+            <select name="start_time" id="start_time" style="background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -260,7 +260,7 @@ $availability_strings = [
             <br>
             <label for="end_date">End: </label>
             <input type="date" name="end_date" id="end_date">
-            <select name="end_time" id="end_time" style= "background-color: gray; color: white; font-size: smaller">
+            <select name="end_time" id="end_time" style="background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
                     for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
@@ -271,7 +271,7 @@ $availability_strings = [
             </select>
             <br>
             <label for="color">Color: </label>
-            <select name="color" id="color" style= "background-color: gray; color: white; font-size: smaller">
+            <select name="color" id="color" style="background-color: gray; color: white; font-size: smaller">
                 <?php
                 const colors = array(
                     'Blue', 'Magenta', 'Light Green', 'Pink', 'Light Orange', 'Light Purple',
@@ -293,7 +293,7 @@ $availability_strings = [
     <?php if (!empty($events)) { ?>
         <form method="post" action="remove_event.php">
             <label for="remove_event">Remove Shift: </label>
-            <select name="remove_event" id="remove_event" style= "background-color: gray; color: white; font-size: smaller">
+            <select name="remove_event" id="remove_event" style="background-color: gray; color: white; font-size: smaller">
                 <?php
                     foreach ($events as $event) {
                         echo '<option value =' . $event["eventid"] . '>' . 'Shift ' . $event["eventid"] . ': ' . $event["title"] .
@@ -304,7 +304,7 @@ $availability_strings = [
 
             <br>
 
-            <input type="submit" name="submit" value="Remove Shift" style= "background-color: gray; color: white; font-size: smaller">
+            <input type="submit" name="submit" value="Remove Shift" style="background-color: gray; color: white; font-size: smaller">
         </form>
     <?php } ?>
     <!-- </div> -->
@@ -342,10 +342,10 @@ $availability_strings = [
                     foreach ($events as $event) {
                         ?> {
                         title: "<?php echo $event["title"];
-                                        echo " (Shift " . $event["eventid"] . ")" ?>",
+                                        echo " (Shift " . $event["eventid"] . ")"; ?>",
                         start: "<?php echo $event["start"]; ?>",
                         end: "<?php echo $event["end"]; ?>",
-                        color: "<?php echo $event["color"] ?>"
+                        color: "<?php echo $event["color"]; ?>"
                     },
             <?php
                 }
