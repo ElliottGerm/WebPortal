@@ -205,7 +205,7 @@ $availability_strings = [
     </form> -->
 
     <br>
-    <h4>Student Availability:</h4>
+    <h4>Student Availabilities:</h4>
     <table style="width:100%" border="1">
         <tr>
             <th>User</th>
@@ -233,40 +233,56 @@ $availability_strings = [
         ?>
     </table>
 
-    <!-- <?php if (!empty($users)) { } ?> -->
     <!-- </div> -->
     <form method="post" action="add_event.php" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="title">User: </label>
             <select name="title" id="title" style="background-color: gray; color: white; font-size: smaller">
                 <?php
-                foreach ($users as $user) {
-                    echo '<option>' . $user . '</option>';
+                if (!empty($users)) {
+                    foreach ($users as $user) {
+                        echo '<option>' . $user . '</option>';
+                    }
+                } else {
+                    echo '<option>None</option>';
                 }
                 ?>
             </select>
             <br>
-            <label for="start_date">Start: </label>
-            <input type="date" name="start_date" id="start_date">
+            <label for="date">Date: </label>
+            <input type="date" name="date" id="date">
+            <br>
+            <label for="start_time">Start Time: </label>
             <select name="start_time" id="start_time" style="background-color: gray; color: white; font-size: smaller">
                 <?php
                 for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
-                    for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
+                    for ($mins = 0; $mins < 60; $mins += 60) // the interval for mins is '30'
+                        echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
+                            . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
+                            . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
+                ?>
+            </select>
+            <label for="end_time">   End Time: </label>
+            <!-- <input type="date" name="end_date" id="end_date"> -->
+            <select name="end_time" id="end_time" style="background-color: gray; color: white; font-size: smaller">
+                <?php
+                for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
+                    for ($mins = 0; $mins < 60; $mins += 60) // the interval for mins is '30'
                         echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
                             . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
                             . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
                 ?>
             </select>
             <br>
-            <label for="end_date">End: </label>
-            <input type="date" name="end_date" id="end_date">
-            <select name="end_time" id="end_time" style="background-color: gray; color: white; font-size: smaller">
+            <label for="courses">Courses: </label>
+            <select name="course" id="course" style="background-color: gray; color: white; font-size: smaller">
                 <?php
-                for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
-                    for ($mins = 0; $mins < 60; $mins += 15) // the interval for mins is '30'
-                        echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
+                const courses = array(
+                    'CS139', 'CS149', 'CS159', 'CS227', 'CS240', 'CS261', 'CS327', 'CS345', 'CS361', 'CS430', 'CS474'
+                );
+                foreach (courses as $course) {
+                    echo '<option>' . $course . '</option>';
+                }
                 ?>
             </select>
             <br>
