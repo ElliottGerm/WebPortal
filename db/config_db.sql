@@ -91,13 +91,13 @@ CREATE TABLE `scheduler_requests` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `signinlogger`
+-- Table structure for table `signInLogger`
 --
 
-DROP TABLE IF EXISTS `signinlogger`;
+DROP TABLE IF EXISTS `signInLogger`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `signinlogger` (
+CREATE TABLE `signInLogger` (
   `signinId` int(11) NOT NULL AUTO_INCREMENT,
   `eid` varchar(255) DEFAULT NULL,
   `signinTime` datetime DEFAULT NULL,

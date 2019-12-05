@@ -64,9 +64,9 @@ function log_sign_in($eid){
 
     $logSignIn = "INSERT into signInLogger (signinId, eid, signInTime) values (?, ?, ?)";
 
-    echo $uniqueId;
-    echo $eid;
-    echo $signInTime;
+    // echo $uniqueId;
+    // echo $eid;
+    // echo $signInTime;
 
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
