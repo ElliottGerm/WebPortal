@@ -1,5 +1,6 @@
 html body {
-    background-color: rgba(138, 191, 244, 0.681);
+    /* background-color: rgba(138, 191, 244, 0.681); */
+    background-color: rgba(92, 161, 230, 0.794);
 }
 
 .btn-link {
@@ -18,12 +19,25 @@ html body {
     display: none;
 }
 
+#queue-table {
+    margin: 25px;
+}
+
+.drop-down {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color: #343A40;
+    color: white;
+    font-size: smaller;
+}
+
 #help-queue {
     -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3);
     min-height: 600px;
     border-radius: 10px 10px 10px 10px;
     background-color: white;
+    /* padding: 20px; */
 }
 
 .sem_title {

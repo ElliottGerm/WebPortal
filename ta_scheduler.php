@@ -59,12 +59,6 @@ $days = [
             margin: 0 auto;
         }
 
-        input[type=submit] {
-            background-color: gray;
-            color: white;
-            border-radius: 5px;
-            border-color: gray;
-        }
     </style>
 </head>
 
@@ -170,7 +164,7 @@ $days = [
                 <?php
                 } ?>
             </div>
-            <input type="submit" name="submit" value="Submit Request">
+            <input class="btn btn-dark float-right mr-4 my-4" type="submit" name="submit" value="Submit Request">
         </form>
     </div>
 

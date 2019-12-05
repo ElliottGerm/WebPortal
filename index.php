@@ -126,12 +126,12 @@ $alreadyQueued = mysqli_num_rows($result);
             </div>
             <div class="col-4 queue">
                 <div id="help-queue">
-                <h2 class="help_title">Help Queue</h2>
-                    <table id="queue-table" class="row justify-content-center">
+                    <h2 class="help_title">Help Queue</h2>
+                    <table id="queue-table" style="table-layout: fixed;">
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Class Number</th>
+                            <th style="width: 30%">First </th>
+                            <th style="width: 40%">Last </th>
+                            <th style="width: 30%">Course</th>
                         </tr>
 
                         <?php
@@ -172,7 +172,7 @@ $alreadyQueued = mysqli_num_rows($result);
                                     <br>
                                     <div>
                                         <span>
-                                            <select name="numClass" id="numClass" placeholder="Class number..">
+                                            <select name="numClass" id="numClass" placeholder="Class number.." class="drop-down">
                                                 <option value="CS149">CS149</option>
                                                 <option value="CS159">CS159</option>
                                                 <option value="CS240">CS240</option>
@@ -180,7 +180,7 @@ $alreadyQueued = mysqli_num_rows($result);
                                                 <option value="CS345">CS345</option>
                                             </select>
                                         </span>
-                                        <button disabled id="joinButton" type="submit" class="btn btn-primary btn-sm">Join Queue</button>
+                                        <button disabled id="joinButton" type="submit" class="btn btn-dark btn-sm" style="background-color: #343A40;">Join Queue</button>
                                     </div>
                                 </div>
                             </form>

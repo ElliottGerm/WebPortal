@@ -164,8 +164,11 @@ if (isset($_POST['submit'])) {
     <!-- navbar stuff ends -->
 
     <div class="container mt-5 pt-5">
-        <h1 style="text-align:center">Student Feedback</h1>
-        <div class="row justify-content-center mt-4 commentWraper">
+
+        <div class="col mt-4 p-3 commentWraper">
+            <div class="row justify-content-center mx-3" id="feedbackHeader" style=" text-align:center; background-color: rgba(229, 235, 242, 0.674);  border-radius: 10px; padding: 20px;">
+                <h1 style="">Student Feedback</h1>
+            </div>
             <div class="row justify-content-center" id="newPost">
                 <?php
                 questionsToday();

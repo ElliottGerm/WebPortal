@@ -7,7 +7,7 @@ function get_users()
     global $link;
     $items = array();
 
-    $sql = "select * from users";
+    $sql = "select * from users where role=2";
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
         exit();

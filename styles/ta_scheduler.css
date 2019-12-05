@@ -1,5 +1,5 @@
 .boxes {
-    border: rgb(183, 182, 182) 1px solid;
+    border: #343A40 1px solid;
     width: 170px;
     height: 170px;
     text-align: center;
@@ -11,14 +11,20 @@
 .dayHeadings {
     text-align: center;
     margin-bottom: 0%;
-    border-style: solid;
-    border-color: gray;
+    background-color: #343A40;
+    color: white;
 }
 
 .drop-down {
     margin-bottom: 10px;
     margin-top: 10px;
-    background-color: gray;
+    background-color: #343A40;
+    color: white;
+    font-size: smaller;
+}
+
+select {
+    background-color: #343A40;
     color: white;
     font-size: smaller;
 }

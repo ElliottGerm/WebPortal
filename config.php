@@ -3,9 +3,11 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "webportal_db";
+$database = "webportal_db_seed";
 
-$filename = "./db/config_db.sql";
+// $filename = "./db/config_db.sql";
+$filename = "./db/config_db_seed.sql";
+
 
 $db_exists = 0;
 

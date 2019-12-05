@@ -34,8 +34,6 @@ $availability_strings = [
 
 $currentDate = date("Y-m-d 00:00:00");
 
-// $current = "SELECT * FROM signinLogger queueTime > ?";
-// $totalLogs = "SELECT signinId,COUNT(*) FROM signInLogger WHERE queueTime > ? GROUP BY signinId;";
 $items = [];
 $total_unique_logs = "SELECT 'total-logs', COUNT(*) as count FROM(SELECT eid,COUNT(*) FROM signInLogger WHERE signinTime >= CURDATE() GROUP BY eid) AS sr";
 
@@ -107,7 +105,6 @@ if ($result = $link->query($total_unique_logs)) {
         }
 
         .vertical-menu option {
-            background-color: #eee;
             color: black;
             display: block;
             padding: 12px;
@@ -200,7 +197,7 @@ if ($result = $link->query($total_unique_logs)) {
             printf( '<div class="col-4 d-flex align-items-center">
                         <div id="useCount">
                             <h4 style="font-weight: bold; text-align: center">Lab Activity Monitor</h4>
-                            <h6 style="text-align: center">Total number of unique students that were in the lab today: <strong>%s</strong></h6>
+                            <h6 style="text-align: center">Total number of unique students that attended lab hours today: <strong>%s</strong></h6>
                         </div>
 
                     </div>', $items[0]["count"]);
@@ -280,7 +277,7 @@ if ($result = $link->query($total_unique_logs)) {
                         </select>
                     </div>
 
-                    <div class="float-right pr-5">
+                    <div class="form-group row float-right pr-5">
                         <input class="btn btn-outline-dark btn-md" type="submit" name="submit" value="Add Shift">
                     </div>
                 </form>
@@ -290,19 +287,21 @@ if ($result = $link->query($total_unique_logs)) {
             <!-- REMOVE SHIFT -->
             <div class="col-5">
                 <?php if (!empty($events)) { ?>
-                    <form method="post" action="remove_event.php">
-                        <label for="remove_event">Remove Shift: </label>
-                        <select name="remove_event" id="remove_event" >
-                            <?php
-                                foreach ($events as $event) {
-                                    echo '<option value =' . $event["eventid"] . '>'. $event["title"] .
-                                        ': ' . $event["start"] . ' - ' . $event["end"] . '</option>';
-                                }
-                                ?>
-                        </select>
-                        <br>
-                        <input class="btn btn-outline-dark btn-md mt-2 float-right" type="submit" name="submit" value="Remove Shift" >
-                    </form>
+                    <div class="form-group row">
+                        <form method="post" action="remove_event.php">
+                            <label for="remove_event">Remove Shift: </label>
+                            <select name="remove_event" id="remove_event" >
+                                <?php
+                                    foreach ($events as $event) {
+                                        echo '<option value =' . $event["eventid"] . '>'. $event["title"] .
+                                            ': ' . $event["start"] . ' - ' . $event["end"] . '</option>';
+                                    }
+                                    ?>
+                            </select>
+                            <br>
+                            <input class="btn btn-outline-dark btn-md mt-2 float-right" type="submit" name="submit" value="Remove Shift" >
+                        </form>
+                    </div>
                 <?php } ?>
             </div>
         </div>

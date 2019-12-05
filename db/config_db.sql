@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `webportal_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `webportal_db`;
+CREATE DATABASE  IF NOT EXISTS `webportal_db_seed` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `webportal_db_seed`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: webportal_db

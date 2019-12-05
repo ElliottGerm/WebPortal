@@ -183,9 +183,13 @@ if (isset($_POST['submit'])) {
     <!-- navbar stuff ends -->
 
     <div class="container mt-5 pt-5">
-        <h1>Learn something new today?</h1>
-        <h3>We want to hear about it. Tell us about your experience below</h3>
+   
+ 
         <div class="col rounded-top mt-4 py-3 commentWraper">
+        <div id="feedbackHeader" style="  background-color: rgba(229, 235, 242, 0.674);  border-radius: 10px; padding: 20px;">
+            <h1>Learn something new today?</h1>
+            <h3>We want to hear about it. Tell us about your experience below.</h3>
+        </div>   
             <div class="row justify-content-center" style="margin-top: 50px;">
                 <form action="give-feedback.php" method="post" id="commentForm">
                     <div class="form-group">
