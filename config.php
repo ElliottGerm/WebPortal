@@ -35,7 +35,7 @@ $query->close();
 
 
 if ($db_exists == 0) {
-    echo "The database does not exist!";
+    // echo "The database does not exist!";
 
     $templine = '';
     // Read in entire file
@@ -59,22 +59,22 @@ if ($db_exists == 0) {
 
     $db_exists = 1;
 } else {
-    echo "The database exists";
+    // echo "The database exists";
     $db_exists = 1;
 }
 
 mysqli_close($conn);
 
 if ($db_exists != 0) {
-    echo "\nconnected to db";
+    // echo "\nconnected to db";
     /* Attempt to connect to MySQL database */
-    $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    $link = mysqli_connect($host, $username, $password, $database);
 
     // Check connection
     if ($link === false) {
         die("ERROR: Could not connect. " . mysqli_connect_error());
     }
 } else {
-    echo "\ncould not connect ot db";
+    // echo "\ncould not connect ot db";
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
