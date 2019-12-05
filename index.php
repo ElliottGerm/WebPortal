@@ -10,7 +10,24 @@ require_once "config.php";
 include("./php/get_events.php");
 
 $events = get_events();
+
+// The following query check to see if the curretn user is already in the queue
+$alreadyQueued = 0;
+$checkQueue = "SELECT * FROM existing_queue WHERE eid = ?";
+if ($link->connect_errno) {
+    printf("Connect failed: %s\n", $link->connect_error);
+    exit();
+}
+
+$stmt = $link->prepare($checkQueue);
+$stmt->bind_param("s", $_SESSION["eid"]);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$alreadyQueued = mysqli_num_rows($result);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +43,8 @@ $events = get_events();
     <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- for icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <!-- Calander stuff -->
     <link href='packages/core/main.css' rel='stylesheet' />
     <link href='packages/daygrid/main.css' rel='stylesheet' />
@@ -48,11 +67,14 @@ $events = get_events();
         #ta_cal {
             max-width: 900px;
             margin: 0 auto;
+            background-color: white;
+
         }
+
     </style>
 </head>
 
-<body onload='showView("<?php echo $_SESSION["role"] ?>", "<?php echo $_SESSION["eid"] ?>")'>
+<body onload='showView("<?php echo $_SESSION["role"] ?>", "<?php echo $_SESSION["eid"] ?>", "<?php echo $alreadyQueued ?>")'>
 
     <!-- Navbar stuff starts -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -93,6 +115,7 @@ $events = get_events();
     </nav>
     <!-- navbar stuff ends -->
 
+   
     <div class="container">
         <div class="row" style="margin-top: 100px;">
             <div class="col-8 ">
@@ -102,27 +125,9 @@ $events = get_events();
                 </div>
             </div>
             <div class="col-4 queue">
-                <h2 class="sem_title">Help Queue</h2>
                 <div id="help-queue">
-
+                <h2 class="help_title">Help Queue</h2>
                     <table id="queue-table" class="row justify-content-center">
-                        <!-- onload="populateQueue()"-->
-
-                        <?php
-
-                        $sql = "SELECT * FROM existing_queue ";
-                        $result = mysqli_query($link, $sql);
-                        /*if ($stmt = mysqli_prepare($link, $sql)) {
-
-                        if (mysqli_stmt_execute($stmt)) {
-                            /* store result 
-                            mysqli_stmt_store_result($stmt);
-
-                        } else {
-                            echo "Oops! Something went wrong. Please try again later.";
-                        }
-                        } */
-                        ?>
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -130,14 +135,26 @@ $events = get_events();
                         </tr>
 
                         <?php
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo "<tr>";
-                            echo "<td>" . $row['fname'] . "</td>";
-                            echo "<td>" . $row['lname'] . "</td>";
-                            echo "<td>" . $row['classnum'] . "</td>";
-                            echo "</tr>";
-                        }
+                        $sql = "SELECT * FROM existing_queue ORDER BY queueTime ASC";
+                        $result = mysqli_query($link, $sql);
 
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                            echo '<td style="text-transform: capitalize">' . $row['fname'] . "</td>";
+                            echo '<td style="text-transform: capitalize"> ' . $row['lname'] . "</td>";
+                            echo "<td>" . $row['classnum'] . "</td>";
+                            printf('<td> 
+                                        <div id="icon">
+                                            <form id="removeHolder" method="post" action="remove_queue.php">
+                                                <button id=%s type="submit" class="btn btn-danger btn-sm" value=%s name="user" style="display: none;">
+                                                    <i class="fa fa-times-circle"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>', $row["eid"], $row["eid"]);
+
+                            echo '</tr>';
+                        }
                         ?>
                     </table>
 
@@ -153,21 +170,19 @@ $events = get_events();
                                     <br>
                                     <input type="hidden" id="last" name="lastName" value="<?php echo $_SESSION["lname"] ?>">
                                     <br>
-                                    <select name="numClass" id="numClass" placeholder="Class number..">
-                                        <option value="CS149">CS149</option>
-                                        <option value="CS159">CS159</option>
-                                        <option value="CS240">CS240</option>
-                                        <option value="CS261">CS261</option>
-                                        <option value="CS345">CS345</option>
-                                    </select>
-                                    <br>
-                                    <button disabled id="joinButton" type="submit" onclick="createQueueEntry()" class="btn btn-primary btn-sm float-right mt-2">Join Queue</button>
-
-                                    <!-- <button type="submit" class="btn btn-outline-primary btn-sm float-right mt-2 mr-2">Edit</button> -->
+                                    <div>
+                                        <span>
+                                            <select name="numClass" id="numClass" placeholder="Class number..">
+                                                <option value="CS149">CS149</option>
+                                                <option value="CS159">CS159</option>
+                                                <option value="CS240">CS240</option>
+                                                <option value="CS261">CS261</option>
+                                                <option value="CS345">CS345</option>
+                                            </select>
+                                        </span>
+                                        <button disabled id="joinButton" type="submit" class="btn btn-primary btn-sm">Join Queue</button>
+                                    </div>
                                 </div>
-                            </form>
-                            <form id="removeHolder" method="post" action="remove_queue.php">
-                                <button disabled="disabled" id="removeButton" type="submit" onclick="removeQueryEntry()" class="btn btn-primary btn-sm float-right mt-2 hidden">Leave Queue</button>
                             </form>
                         </div>
                     </div>
@@ -193,6 +208,7 @@ $events = get_events();
 
     <script type="text/javascript" src="./scripts/calendar_scripts.js"></script>
     <script type="text/javascript" src="./scripts/queue_scripts.js"></script>
+    <script type="text/javascript" src="./scripts/role.js"></script>
     <script>
         events = [
             <?php if (!empty($events)) { ?>
@@ -211,7 +227,6 @@ $events = get_events();
         ]
         load_calendar('ta_cal', events);
     </script>
-    <script type="text/javascript" src="./scripts/role.js"></script>
 
 </body>
 

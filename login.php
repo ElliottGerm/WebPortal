@@ -1,13 +1,12 @@
 <?php
 
+
 // Initialize the session
 session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    //   header("location: welcome.php");
     header("location: index.php");
-
     exit;
 } else {
     $_SESSION["loggedin"] = "";
@@ -21,6 +20,71 @@ require_once "config.php";
 // Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = "";
+
+function log_sign_in($eid){
+
+    global $link;
+    $isEmpty = 0;
+    
+    // Creates unique ID
+    $sql = "SELECT EXISTS (SELECT 1 FROM webportal_db.signInLogger)";
+    
+    if ($link->connect_errno) {
+        printf("Connect failed: %s\n", $link->connect_error);
+        exit();
+    }
+    
+    if ($result = $link->query($sql)) {
+        while ($row = $result->fetch_assoc()) {
+            $tmp = array_reverse($row);
+            $isEmpty = array_pop($tmp);
+        }
+        /* free result set */
+        $result->close();
+    }
+    
+    if ($isEmpty != 0) {
+        $sql = "SELECT MAX(signinId) FROM webportal_db.signInLogger;";
+    
+        if ($result = $link->query($sql)) {
+            while ($row = $result->fetch_assoc()) {
+                $tmp = array_reverse($row);
+                $uniqueId = array_pop($tmp) + 1;
+            }
+            /* free result set */
+            $result->close();
+        }
+    } else {
+        $uniqueId = 0;
+    }
+    
+
+    date_default_timezone_set('America/New_York');
+    $signInTime = date("Y-m-d H:i:s");
+
+    $logSignIn = "INSERT into signInLogger (signinId, eid, signInTime) values (?, ?, ?)";
+
+    echo $uniqueId;
+    echo $eid;
+    echo $signInTime;
+
+    if ($link->connect_errno) {
+        printf("Connect failed: %s\n", $link->connect_error);
+        exit();
+    }
+
+    $stmt = $link->prepare($logSignIn);
+    $stmt->bind_param("iss", $uniqueId, $eid, $signInTime);
+    $stmt->execute();
+
+    $newId = $link->insert_id;
+    if (!is_null($newId)) {
+        echo "New record created successfully. Last inserted ID is: " . $newId;
+    } else {
+        echo "Error: " . $logSignIn . "<br>" . $link->error;
+    }
+
+}
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -62,9 +126,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     mysqli_stmt_bind_result($stmt, $username, $hashed_password, $role, $fname, $lname);
                     if (mysqli_stmt_fetch($stmt)) {
                         if (password_verify($password, $hashed_password)) {
+
+                            if($role == 3) {
+                                log_sign_in($username); 
+                            }
                             // Password is correct, so start a new session
                             session_start();
-
+                            
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["eid"] = $username;

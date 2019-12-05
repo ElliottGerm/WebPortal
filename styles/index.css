@@ -1,65 +1,62 @@
+html body {
+    background-color: rgba(138, 191, 244, 0.681);
+}
+
 .btn-link {
     color: rgb(109, 109, 255);
 }
-#current_user{
-  color: white;
-  margin-right: 5px;
+
+#current_user {
+    color: white;
+    margin-right: 5px;
 }
 
-#stu_view, #ta_view, #manager_view, #stu_feedback_view{ 
-  display: none;
+#stu_view,
+#ta_view,
+#manager_view,
+#stu_feedback_view {
+    display: none;
 }
 
-#help-queue{
-  -webkit-box-shadow: 0 10px 30px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 10px 30px 0 rgba(0,0,0,0.3);
-  min-height: 600px;
-  /* background-color: #56baed; */
-  border-radius: 10px 10px 10px 10px;
+#help-queue {
+    -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3);
+    min-height: 600px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: white;
 }
 
-.sem_title{
-  background-color: #343A40;
-  font-family: "Poppins", sans-serif;
-  color: white;
-  /* text-transform: uppercase; */
-  border-radius: 10px 10px 10px 10px;
-  text-align: center;
-  padding: 0.25em;
+.sem_title {
+    background-color: #343A40;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    padding: 0.25em;
+    /* margin: 5px; */
+}
+
+.help_title {
+    background-color: #343A40;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    border-radius: 10px 10px 0px 0px;
+    text-align: center;
+    padding: 0.25em;
 }
 
 
-/* FANCY LIST ANIMATION STUFF*/
-/* li {
-    list-style: none;
-    background: #3c9dd1;
-    color: #fff;
-    height: 0;
-    line-height: 2em;
-    margin: 0;
-    padding: 0 0.5em;
-    overflow: hidden;
-    width: 10em;
-  }
+/* WIGGLE ICON ANIMATION */
 
-  li.show {
-    height: 2em;
-    margin: 2px 0;
-  }
+#icon:hover {
+    animation: wiggle .1s infinite alternate;
+}
 
-  .swing {
-    perspective: 100px;
-  }
-
-  .swing li {
-    opacity: 0;
-    transform: rotateX(-90deg);
-    transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
-  }
-  
-  .swing li.show {
-    opacity: 1;
-    transform: none;
-    transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
-  } */
-/* FANCY LIST ANIMATION STUFF*/
+@keyframes wiggle {
+    0% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(2deg);
+    }
+}

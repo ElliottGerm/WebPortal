@@ -1,9 +1,9 @@
 function select(id) {
     div = document.getElementById("selection-menu");
     element = document.getElementById(id);
-    input = document.getElementById('input_'+ id);
+    input = document.getElementById('input_' + id);
 
-    if(element.className === "inactive"){
+    if (element.className === "inactive") {
         element.classList.remove("inactive");
         element.classList.add("active");
         input.classList.remove("inactive");
@@ -17,10 +17,9 @@ function select(id) {
 
     for (var opt, j = 0; opt = div.children[j]; j++) {
         if (opt.className == "active" && opt.tagName == "INPUT") {
-          opt.disabled = '';
-        } else if(opt.className == "inactive" && opt.tagName == "INPUT")
-        {
-          opt.disabled = 'disabled';
+            opt.disabled = '';
+        } else if (opt.className == "inactive" && opt.tagName == "INPUT") {
+            opt.disabled = 'disabled';
         }
     }
 

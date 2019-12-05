@@ -1,22 +1,21 @@
-.boxes{
-    border: rgb(183, 182, 182) 1px solid; 
-    width: 170px; 
+.boxes {
+    border: rgb(183, 182, 182) 1px solid;
+    width: 170px;
     height: 170px;
     text-align: center;
     padding-top: 20px;
     padding-left: 5px;
     padding-right: 5px;
-    
 }
 
-.dayHeadings{
+.dayHeadings {
     text-align: center;
     margin-bottom: 0%;
     border-style: solid;
     border-color: gray;
 }
 
-.drop-down{
+.drop-down {
     margin-bottom: 10px;
     margin-top: 10px;
     background-color: gray;

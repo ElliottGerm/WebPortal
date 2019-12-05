@@ -14,9 +14,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 function questionsToday()
 {
     global $link;
-    date_default_timezone_set('America/New_York');
-    // $today = date(DATE_RSS);
-    // $questionsTodayQuery = "select * from comments where asked > curdate()";
     $questionsTodayQuery = "SELECT * from comments WHERE eid=?";
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
@@ -28,35 +25,34 @@ function questionsToday()
     $stmt->execute();
 
     $result = $stmt->get_result();
-    
+
     $items = [];
-    
-    // if ($result = $link->query($questionsTodayQuery)) {
-        // printf("Select returned %d rows.\n", $result->num_rows);
-        while ($question = $result->fetch_assoc()) {
-            $items[] = $question;
-        }
-        if (sizeof($items) > 0) {
-            $items = array_reverse($items, true);
-        }
 
 
-        foreach ($items as $item) {
-            // echo $item['time']." - ".$item['username']." - ".$item['message'];
-            printf('<div class="scroll-bar-wrap"> 
+    while ($question = $result->fetch_assoc()) {
+        $items[] = $question;
+    }
+    if (sizeof($items) > 0) {
+        $items = array_reverse($items, true);
+    }
+
+
+    foreach ($items as $item) {
+        printf('<div class="scroll-bar-wrap"> 
                                 <div class="row">
                                     <div class="scroll-box">
                                         <div class="sticky-top commentHeader">
                                             <p> <strong> %s </strong> <span class="dateFormat"> %s</span> </p> 
                                         </div>
                                         <br>
+
                                         <div class="commentBody">
                                             <pre style="font-family: arial; line-height: 1.4;">%s</pre>
                                         </div>                                   
                                     </div>
                                 </div>
 
-                                <div class="row justify-content-end pr-3">
+                                <div class="float-right pr-3">
                                    <form method="post" action="./delete_post.php">
                                         <button class="btn btn-outline-secondary btn-sm m-2" role="button" type="submit" value=%s name="postId">
                                             <span><i class="fa fa-trash mr-1"></i></span>delete post
@@ -65,14 +61,13 @@ function questionsToday()
                                 </div>
                                 <div class="row cover-bar"></div>
                             </div>', $item["eid"], $item["postDate"], $item["commentBody"], $item["postId"]);
-        }
+    }
 
-        /* free result set */
-        $result->close();
-    // }
+    /* free result set */
+    $result->close();
 }
 
-function newQuestion($question, $author)
+function newQuestion($post, $author)
 {
     global $link;
     $isEmpty = 0;
@@ -87,7 +82,6 @@ function newQuestion($question, $author)
 
     if ($result = $link->query($sql)) {
         while ($row = $result->fetch_assoc()) {
-            // echo array_pop(array_reverse($row));
             $tmp = array_reverse($row);
             $isEmpty = array_pop($tmp);
         }
@@ -107,25 +101,32 @@ function newQuestion($question, $author)
             /* free result set */
             $result->close();
         }
+    } else {
+        $postId = 0;
     }
-
 
     date_default_timezone_set('America/New_York');
     $postDate = date("m/d/y g:i a");
-    $newQuestionQuery = "INSERT into comments (eid, commentBody, postDate, postId) values (?, ?, ?, ?)";
-    // printf("%s %s <br>", $question, $author);
+    $newFeedbackQuery = "INSERT into comments (postId, eid, commentBody, postDate) values (?, ?, ?, ?)";
+
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
         exit();
     }
 
-    $stmt = $link->prepare($newQuestionQuery);
-    $stmt->bind_param("sssi", $author, $question, $postDate, $postId);
+    $stmt = $link->prepare($newFeedbackQuery);
+    $stmt->bind_param("isss", $postId, $author, $post, $postDate);
     $stmt->execute();
+
+    $newId = $link->insert_id;
+    // if (!is_null($newId)) {
+    //     echo "New record created successfully. Last inserted ID is: " . $newId;
+    // } else {
+    //     echo "Error: " . $newFeedbackQuery . "<br>" . $link->error;
+    // }
 }
 
 if (isset($_POST['submit'])) {
-    echo (" was set post <br>");
     newQuestion($_POST["commentBody"], $current_user);
 }
 
@@ -184,7 +185,7 @@ if (isset($_POST['submit'])) {
     <div class="container mt-5 pt-5">
         <h1>Learn something new today?</h1>
         <h3>We want to hear about it. Tell us about your experience below</h3>
-        <div class="row justify-content-center mt-4 commentWraper">
+        <div class="col rounded-top mt-4 py-3 commentWraper">
             <div class="row justify-content-center" style="margin-top: 50px;">
                 <form action="give-feedback.php" method="post" id="commentForm">
                     <div class="form-group">
@@ -200,7 +201,6 @@ if (isset($_POST['submit'])) {
                 ?>
             </div>
         </div>
-
     </div>
 
 

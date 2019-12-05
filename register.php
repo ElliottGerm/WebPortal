@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check input errors before inserting in database
-    if (empty($username_err) && empty($fname_err) && empty($lname_err) && empty($email_err) &&empty($password_err) && empty($confirm_password_err)) {
+    if (empty($username_err) && empty($fname_err) && empty($lname_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)) {
 
         // Prepare an insert statement
         $sql = "INSERT INTO users (eid, fname, lname, password, role, email) VALUES (?, ?, ?, ?, 3, ?)";
@@ -195,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- EMAIL -->
                         <div class="form-group input-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"> <i class="fa fa-email"></i> </span>
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                             </div>
                             <input type="text" name="email" class="form-control" placeholder="Email">
                             <span class="help-block"><?php echo $email_err; ?></span>
@@ -216,13 +216,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" value="<?php echo $confirm_password; ?>">
                             <span class="help-block"><?php echo $confirm_password_err; ?></span>
                         </div>
-
-                        <!-- <div class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                        </div>
-                        <input name="email" class="form-control" placeholder="Email address" type="email">
-                    </div> -->
                         <!-- SUBMIT REGISTRATION -->
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block" value="submit"> Create Account </button>

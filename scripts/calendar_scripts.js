@@ -5,7 +5,7 @@ function load_calendar(cal_id, events) {
     var yyyy = today.getFullYear();
     today = yyyy + '-' + mm + '-' + dd;
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById(cal_id);
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
