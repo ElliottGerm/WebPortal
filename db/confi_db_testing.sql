@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `ta_test_db3` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-USE `ta_test_db3`;
+CREATE DATABASE  IF NOT EXISTS `ta_test_db1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `ta_test_db1`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: ta_test_db3
+-- Host: localhost    Database: ta_test_db1
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -31,7 +31,7 @@ CREATE TABLE `comments` (
   `postDate` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`postId`),
   UNIQUE KEY `postId_UNIQUE` (`postId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `events` (
   `end` varchar(45) DEFAULT NULL,
   `color` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`eventid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `existing_queue` (
   `lname` varchar(255) DEFAULT NULL,
   `classnum` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `scheduler_requests` (
   `su_times` varchar(45) DEFAULT NULL,
   `request_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `signinlogger` (
   `eid` varchar(255) DEFAULT NULL,
   `signinTime` datetime DEFAULT NULL,
   PRIMARY KEY (`signinId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `users` (
   `email` varchar(45) DEFAULT NULL,
   `role` int(11) DEFAULT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

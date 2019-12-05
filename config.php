@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $username = "root";
-$password = "password";
+$password = "";
 $database = "webportal_db";
 
 $filename = "./db/config_db.sql";
@@ -51,7 +51,7 @@ if ($db_exists == 0) {
         // If it has a semicolon at the end, it's the end of the query
         if (substr(trim($line), -1, 1) == ';') {
             // Perform the query
-            mysqli_query($conn, $templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysql_error() . '<br /><br />');
+            mysqli_query($conn, $templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysqli_error($conn) . '<br /><br />');
             // Reset temp variable to empty
             $templine = '';
         }
