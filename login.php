@@ -127,9 +127,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (mysqli_stmt_fetch($stmt)) {
                         if (password_verify($password, $hashed_password)) {
 
-                            log_sign_in($username); 
-                            // header("createId.php");
-
+                            if($role == 3) {
+                                log_sign_in($username); 
+                            }
                             // Password is correct, so start a new session
                             session_start();
                             

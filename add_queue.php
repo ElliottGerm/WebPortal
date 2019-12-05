@@ -20,7 +20,6 @@ if ($link->connect_errno) {
 $query = $link->prepare($search);
 $query->bind_param("s", $eid);
 $results = mysqli_query($link, $query);
-echo $results;
 
 if(mysqli_num_rows($results) == 0) {
     $stmt = $link->prepare($sql);

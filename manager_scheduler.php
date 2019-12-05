@@ -31,6 +31,27 @@ $availability_strings = [
     'sa_times',
     'su_times'
 ];
+
+$currentDate = date("Y-m-d 00:00:00");
+
+// $current = "SELECT * FROM signinLogger queueTime > ?";
+// $totalLogs = "SELECT signinId,COUNT(*) FROM signInLogger WHERE queueTime > ? GROUP BY signinId;";
+$items = [];
+$total_unique_logs = "SELECT 'total-logs', COUNT(*) as count FROM(SELECT eid,COUNT(*) FROM signInLogger WHERE signinTime >= CURDATE() GROUP BY eid) AS sr";
+
+if ($link->connect_errno) {
+    printf("Connect failed: %s\n", $link->connect_error);
+    exit();
+}
+if ($result = $link->query($total_unique_logs)) {
+    while($row = $result->fetch_assoc()) {
+        $items[] = $row;
+    }
+    /* free result set */
+    $result->close();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -137,193 +158,157 @@ $availability_strings = [
         </div>
     </nav>
     <!-- navbar stuff ends -->
-
-    <!-- <div class="container"> -->
+                
+    <div class="container">
     <!-- <div class="row" style="margin-top: 300px;"> -->
     <div style="margin-top: 150px;">
-        <div id='ta_cal'></div>
+
+    </div>
+    <!-- TA AVAILABILITY TABLE -->
+    <div class="row" id="availableTable">
+        <div class="col-8">
+            <h4>TA Availabilities:</h4>
+            <table style="width:700" border="1">
+                <tr>
+                    <th>User</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+                <?php
+                foreach ($stu_availabilities as $availability) {
+                    echo "<tr>";
+                    echo "<td>" . $availability["eid"] . "</td>";
+                    foreach ($availability_strings as $availability_string) {
+                        if ($availability[$availability_string] != "NULL") {
+                            echo "<td>" . $availability[$availability_string] . "</td>";
+                        } else {
+                            echo "<td>None</td>";
+                        }
+                    }
+                    echo "</tr>";
+                }
+                ?>
+            </table>
+        </div>
+        <?php 
+        
+            printf( '<div class="col-4 d-flex align-items-center">
+                        <div id="useCount">
+                            <h4 style="font-weight: bold; text-align: center">Lab Activity Monitor</h4>
+                            <h6 style="text-align: center">Total number of unique students that were in the lab today: <strong>%s</strong></h6>
+                        </div>
+
+                    </div>', $items[0]["count"]);
+        ?>
     </div>
 
-    <!-- <h4>Student Requests</h4>
+        
+        <div class="row mt-3" id="shiftForms">
+            <!-- SHIFT SCHEDULING FORM -->
+            <div class="col-7 py-0">
+                <form method="post" action="add_event.php" onsubmit="return validateForm()">
+                    <div class="form-group row">
+                        <!-- SELECTING USER -->
+                        <label for="title">User: </label>
+                        <select name="title" id="title" >
+                            <?php
+                            if (!empty($users)) {
+                                foreach ($users as $user) {
+                                    echo '<option>' . $user . '</option>';
+                                }
+                            } else {
+                                echo '<option>None</option>';
+                            }
+                            ?>
+                        </select>
+                        <!-- SELECTING COURSES -->
+                        <label for="courses">Courses: </label>
+                        <select name="course" id="course">
+                            <?php
+                            const courses = array(
+                                'CS139', 'CS149', 'CS159', 'CS227', 'CS240', 'CS261', 'CS327', 'CS345', 'CS361', 'CS430', 'CS474'
+                            );
+                            foreach (courses as $course) {
+                                echo '<option>' . $course . '</option>';
+                            }
+                            ?>
+                        </select>
+                        <!-- SELECTING COLOR -->
+                        <label for="color">Color: </label>
+                        <select name="color" id="color" >
+                            <?php
+                            const colors = array(
+                                'Blue', 'Magenta', 'Light Green', 'Pink', 'Light Orange', 'Light Purple',
+                                'Cyan', 'Light Yellow', 'Light Red', 'Light Brown'
+                            );
+                            foreach (colors as $color) {
+                                echo '<option>' . $color . '</option>';
+                            }
+                            ?>
+                        </select>
+                        <br>
+                    </div>
+                    <div class="form-group row">
+                        <label for="date">Date: </label>
+                        <input type="date" name="date" id="date">
+                        <br>
+                        <label for="start_time">Start Time: </label>
+                        <select name="start_time" id="start_time" >
+                            <?php
+                            for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
+                                for ($mins = 0; $mins < 60; $mins += 60) // the interval for mins is '30'
+                                    echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
+                                        . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
+                                        . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
+                            ?>
+                        </select>
+                        <label for="end_time">   End Time: </label>
+                        <!-- <input type="date" name="end_date" id="end_date"> -->
+                        <select name="end_time" id="end_time">
+                            <?php
+                            for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
+                                for ($mins = 0; $mins < 60; $mins += 60) // the interval for mins is '30'
+                                    echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
+                                        . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
+                                        . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
+                            ?>
+                        </select>
+                    </div>
 
-    <form method="post">
-        <div id="selection-menu" class="vertical-menu">
-            <?php
+                    <div class="float-right pr-5">
+                        <input class="btn btn-outline-dark btn-md" type="submit" name="submit" value="Add Shift">
+                    </div>
+                </form>
+            </div>
 
-            foreach ($requests as $request) {
-                $valid_times = array();
-                $request_msg = $request['eid'] . " has requested to work:\n";
-                $request_times = array();
-                $message = "";
 
-                foreach ($request_strings as $request_string) {
-                    if ($request[$request_string] != "NULL") {
-                        $request_times[] = $request_string;
-                    }
-                }
-
-                foreach ($request_times as $request_time) {
-                    $valid_times[] = "* from " . $request[$request_time] . " on " . array_search($request_time, $request_strings) . "\n";
-                }
-
-                foreach ($valid_times as $valid_time) {
-                    $request_msg = $request_msg . $valid_time;
-                }
-
-                // $compact_mo = 'Mo:'. $request['mo_times'] .';';
-                // $compact_tu = 'Tu:'. $request['tu_times'] .';';
-                // $compact_we = 'We:'. $request['we_times'] .';';
-                // $compact_th = 'Th:'. $request['th_times'] .';';
-                // $compact_fr = 'Fr:'. $request['fr_times'] .';';
-                // $compact_sa = 'Sa:'. $request['sa_times'] .';';
-                // $compact_su = 'Su:'. $request['su_times'] .';';
-                // $compact_msg = $request['eid'] . ': '. $compact_mo . $compact_tu . $compact_we . $compact_th . $compact_fr . $compact_sa .$compact_su;
-
-                echo '<option title="' . $request_msg . '" id=' . $request['id'] . ' class="inactive" onclick="select(' . $request['id'] . ');">' . $request['eid'] . ' Schedule Request (Hover to view)</option>';
-                echo '<input id="input_' . $request['id'] . '" name="input_' . $request['id'] . '" class="inactive" value=' . $request['eid'] . ',' . $request['id'] . ' hidden disabled>';
-            }
-            ?>
-
+            <!-- REMOVE SHIFT -->
+            <div class="col-5">
+                <?php if (!empty($events)) { ?>
+                    <form method="post" action="remove_event.php">
+                        <label for="remove_event">Remove Shift: </label>
+                        <select name="remove_event" id="remove_event" >
+                            <?php
+                                foreach ($events as $event) {
+                                    echo '<option value =' . $event["eventid"] . '>'. $event["title"] .
+                                        ': ' . $event["start"] . ' - ' . $event["end"] . '</option>';
+                                }
+                                ?>
+                        </select>
+                        <br>
+                        <input class="btn btn-outline-dark btn-md mt-2 float-right" type="submit" name="submit" value="Remove Shift" >
+                    </form>
+                <?php } ?>
+            </div>
         </div>
-
-        <h4>Comments:</h4>
-        <textarea name="request_comment" rows="4" cols="50">None</textarea>
-
-        <br>
-
-        <input type="submit" name="accept" value="Accept">
-        <input type="submit" name="reject" value="Reject">
-
-        <script type="text/javascript">
-            var val = "";
-            val = "<?php include "accept-reject_request.php"; ?>"
-            if (val) {
-                val = val.replace(/\t/g, '\n');
-                alert(val);
-            }
-        </script>
-    </form> -->
-
-    <br>
-    <h4>Student Availabilities:</h4>
-    <table style="width:100%" border="1">
-        <tr>
-            <th>User</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-            <th>Sunday</th>
-        </tr>
-        <?php
-        foreach ($stu_availabilities as $availability) {
-            echo "<tr>";
-            echo "<td>" . $availability["eid"] . "</td>";
-            foreach ($availability_strings as $availability_string) {
-                if ($availability[$availability_string] != "NULL") {
-                    echo "<td>" . $availability[$availability_string] . "</td>";
-                } else {
-                    echo "<td>None</td>";
-                }
-            }
-            echo "</tr>";
-        }
-        ?>
-    </table>
-
-    <!-- </div> -->
-    <form method="post" action="add_event.php" onsubmit="return validateForm()">
-        <div class="form-group">
-            <label for="title">User: </label>
-            <select name="title" id="title" style="background-color: gray; color: white; font-size: smaller">
-                <?php
-                if (!empty($users)) {
-                    foreach ($users as $user) {
-                        echo '<option>' . $user . '</option>';
-                    }
-                } else {
-                    echo '<option>None</option>';
-                }
-                ?>
-            </select>
-            <br>
-            <label for="date">Date: </label>
-            <input type="date" name="date" id="date">
-            <br>
-            <label for="start_time">Start Time: </label>
-            <select name="start_time" id="start_time" style="background-color: gray; color: white; font-size: smaller">
-                <?php
-                for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
-                    for ($mins = 0; $mins < 60; $mins += 60) // the interval for mins is '30'
-                        echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
-                ?>
-            </select>
-            <label for="end_time">   End Time: </label>
-            <!-- <input type="date" name="end_date" id="end_date"> -->
-            <select name="end_time" id="end_time" style="background-color: gray; color: white; font-size: smaller">
-                <?php
-                for ($hours = 0; $hours < 24; $hours++) // the interval for hours is '1'
-                    for ($mins = 0; $mins < 60; $mins += 60) // the interval for mins is '30'
-                        echo '<option>' . str_pad($hours, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad($mins, 2, '0', STR_PAD_LEFT) . ':'
-                            . str_pad(0, 2, '0', STR_PAD_LEFT) . '</option>';
-                ?>
-            </select>
-            <br>
-            <label for="courses">Courses: </label>
-            <select name="course" id="course" style="background-color: gray; color: white; font-size: smaller">
-                <?php
-                const courses = array(
-                    'CS139', 'CS149', 'CS159', 'CS227', 'CS240', 'CS261', 'CS327', 'CS345', 'CS361', 'CS430', 'CS474'
-                );
-                foreach (courses as $course) {
-                    echo '<option>' . $course . '</option>';
-                }
-                ?>
-            </select>
-            <br>
-            <label for="color">Color: </label>
-            <select name="color" id="color" style="background-color: gray; color: white; font-size: smaller">
-                <?php
-                const colors = array(
-                    'Blue', 'Magenta', 'Light Green', 'Pink', 'Light Orange', 'Light Purple',
-                    'Cyan', 'Light Yellow', 'Light Red', 'Light Brown'
-                );
-                foreach (colors as $color) {
-                    echo '<option>' . $color . '</option>';
-                }
-                ?>
-            </select>
-            <br>
-
-            <input type="submit" name="submit" value="Add Shift">
-        </div>
-    </form>
-
-    <br>
-
-    <?php if (!empty($events)) { ?>
-        <form method="post" action="remove_event.php">
-            <label for="remove_event">Remove Shift: </label>
-            <select name="remove_event" id="remove_event" style="background-color: gray; color: white; font-size: smaller">
-                <?php
-                    foreach ($events as $event) {
-                        echo '<option value =' . $event["eventid"] . '>' . 'Shift ' . $event["eventid"] . ': ' . $event["title"] .
-                            '; ' . $event["start"] . ' - ' . $event["end"] . '</option>';
-                    }
-                    ?>
-            </select>
-
-            <br>
-
-            <input type="submit" name="submit" value="Remove Shift" style="background-color: gray; color: white; font-size: smaller">
-        </form>
-    <?php } ?>
-    <!-- </div> -->
+        <!-- CALANDER -->
+        <div class="row justify-content-center my-5" id='ta_cal'></div>
+    </div>
 
     <!-- ALL THE STUFF WE NEED FOR BOOTSTRAP AND JQEURY -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
