@@ -94,7 +94,7 @@ if ($start_sunday != "N/A" && $end_sunday != "N/A") {
 
 $id = 0;
 
-$sql = "SELECT EXISTS (SELECT 1 FROM webportal_db.scheduler_requests)";
+$sql = "SELECT EXISTS (SELECT 1 FROM scheduler_requests)";
 
 if ($link->connect_errno) {
     printf("Connect failed: %s\n", $conn->connect_error);
@@ -110,7 +110,7 @@ if ($result = $link->query($sql)) {
 }
 
 if ($isEmpty != 0) {
-    $sql = "SELECT MAX(id) FROM webportal_db.scheduler_requests;";
+    $sql = "SELECT MAX(id) FROM scheduler_requests;";
 
     if ($result = $link->query($sql)) {
         // printf("Select returned %d rows.\n", $result->num_rows);
@@ -122,7 +122,7 @@ if ($isEmpty != 0) {
     }
 }
 
-$newRequest = "insert into webportal_db.scheduler_requests (id, eid, mo_times, tu_times, we_times, 
+$newRequest = "insert into scheduler_requests (id, eid, mo_times, tu_times, we_times, 
 th_times, fr_times, sa_times, su_times, request_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 if ($link->connect_errno) {
     printf("Connect failed: %s\n", $link->connect_error);

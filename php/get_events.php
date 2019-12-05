@@ -7,7 +7,7 @@ function get_events()
     global $link;
     $items = array();
 
-    $sql = "select * from webportal_db.events";
+    $sql = "select * from events";
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
         exit();

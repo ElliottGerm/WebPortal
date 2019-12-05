@@ -45,7 +45,7 @@ const colors = [
 
 $colorHash = colors[$color];
 
-$sql = "SELECT EXISTS (SELECT 1 FROM webportal_db.events)";
+$sql = "SELECT EXISTS (SELECT 1 FROM events)";
 
 if ($link->connect_errno) {
     printf("Connect failed: %s\n", $conn->connect_error);
@@ -61,7 +61,7 @@ if ($result = $link->query($sql)) {
 }
 
 if ($isEmpty != 0) {
-    $sql = "SELECT MAX(eventid) FROM webportal_db.events;";
+    $sql = "SELECT MAX(eventid) FROM events;";
 
     if ($result = $link->query($sql)) {
         // printf("Select returned %d rows.\n", $result->num_rows);
@@ -73,7 +73,7 @@ if ($isEmpty != 0) {
     }
 }
 
-$newEvent = "insert into webportal_db.events (eventid, title, start, end, color) values (?, ?, ?, ?, ?)";
+$newEvent = "insert into events (eventid, title, start, end, color) values (?, ?, ?, ?, ?)";
 if ($link->connect_errno) {
     printf("Connect failed: %s\n", $link->connect_error);
     exit();

@@ -7,7 +7,7 @@ function get_requests()
     global $link;
     $items = array();
 
-    $sql = "select * from webportal_db.scheduler_requests order by request_date DESC limit 10";
+    $sql = "select * from scheduler_requests order by request_date DESC limit 10";
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
         exit();

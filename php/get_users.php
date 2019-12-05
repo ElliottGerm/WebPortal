@@ -7,7 +7,7 @@ function get_users()
     global $link;
     $items = array();
 
-    $sql = "select * from webportal_db.users";
+    $sql = "select * from users";
     if ($link->connect_errno) {
         printf("Connect failed: %s\n", $link->connect_error);
         exit();
